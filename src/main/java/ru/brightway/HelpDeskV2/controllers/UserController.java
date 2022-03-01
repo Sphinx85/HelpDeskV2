@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.brightway.HelpDeskV2.DTO.UserDTO;
-import ru.brightway.HelpDeskV2.services.UserService;
+import ru.brightway.HelpDeskV2.Entites.User;
+import ru.brightway.HelpDeskV2.services.interfaces.UserService;
 
 import java.util.List;
 
@@ -19,13 +19,13 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/save")
-    public UserDTO saveUser(@RequestBody UserDTO userDTO){
-        log.info("Save user: " + userDTO);
-        return userService.saveUser(userDTO);
+    public User saveUser(@RequestBody User user){
+        log.info("Save user: " + user);
+        return userService.saveUser(user);
     }
 
     @GetMapping("/findAll")
-    public List<UserDTO> findAllUsers() {
+    public List<User> findAllUsers() {
         log.info("Find all users");
         return userService.findAll();
     }

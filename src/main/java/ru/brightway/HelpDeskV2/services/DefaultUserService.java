@@ -2,24 +2,22 @@ package ru.brightway.HelpDeskV2.services;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.brightway.HelpDeskV2.DTO.UserDTO;
 import ru.brightway.HelpDeskV2.Entites.User;
 import ru.brightway.HelpDeskV2.repository.UserRepository;
+import ru.brightway.HelpDeskV2.services.interfaces.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class DefaultUserService implements UserService{
+public class DefaultUserService implements UserService {
 
     private final UserRepository userRepository;
-    private final UserConverter userConverter;
 
     @Override
-    public UserDTO saveUser(UserDTO userDTO) {
-        User savedUser = userRepository.save(userConverter.fromDTOtoUser(userDTO));
-        return userConverter.fromUserToDTO(savedUser);
+    public User saveUser(User user) {
+        return userRepository.save(user);
     }
 
     @Override
@@ -28,10 +26,8 @@ public class DefaultUserService implements UserService{
     }
 
     @Override
-    public List<UserDTO> findAll() {
-        return userRepository.findAll()
-                .stream()
-                .map(userConverter::fromUserToDTO)
-                .collect(Collectors.toList());
+    public List<User> findAll() {
+        return new ArrayList<>(userRepository.findAll());
+
     }
 }

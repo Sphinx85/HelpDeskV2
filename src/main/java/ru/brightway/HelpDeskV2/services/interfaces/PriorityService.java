@@ -5,7 +5,7 @@ import ru.brightway.HelpDeskV2.Entites.Priority;
 import java.util.List;
 
 public interface PriorityService {
-    Priority saveUser (Priority priority);
+    Priority savePriority(Priority priority);
     void deletePriority(Integer priorityId);
     List<Priority> findAll();
 }

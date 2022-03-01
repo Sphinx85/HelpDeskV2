@@ -13,7 +13,7 @@ import java.util.List;
 public class DefaultPriorityService implements PriorityService {
     private final PriorityRepository priorityRepository;
     @Override
-    public Priority saveUser(Priority priority) {
+    public Priority savePriority(Priority priority) {
         return priorityRepository.save(priority);
     }
 

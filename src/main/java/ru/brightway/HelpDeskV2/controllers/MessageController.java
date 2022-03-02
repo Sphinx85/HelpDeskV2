@@ -31,7 +31,7 @@ public class MessageController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteMessage(Integer id){
+    public ResponseEntity<Void> deleteMessage(@PathVariable Integer id){
         log.info("Message deleted: " + id);
         messageService.deleteMessage(id);
         return ResponseEntity.ok().build();

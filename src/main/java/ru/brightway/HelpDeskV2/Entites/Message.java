@@ -6,25 +6,26 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "message")
+@Table(name = "\"message\"")
 @Data
 @NoArgsConstructor
 public class Message {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column
+    @Column (name = "description")
     private String description;
 
-    @Column (insertable = false, updatable = false)
+    @Column (name = "user_id", insertable = false, updatable = false)
     private Integer user_id;
 
-    @Column (insertable = false, updatable = false)
+    @Column (name = "type_id",insertable = false, updatable = false)
     private Integer type_id;
 
-    @Column (insertable = false, updatable = false)
+    @Column (name = "priority_id",insertable = false, updatable = false)
     private Integer priority_id;
 
     @ManyToOne(fetch = FetchType.LAZY)

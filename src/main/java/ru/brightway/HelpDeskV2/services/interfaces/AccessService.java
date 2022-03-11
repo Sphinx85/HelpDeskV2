@@ -1,11 +1,11 @@
 package ru.brightway.HelpDeskV2.services.interfaces;
 
-import ru.brightway.HelpDeskV2.Entites.Access;
+import ru.brightway.HelpDeskV2.Entites.Role;
 
 import java.util.List;
 
 public interface AccessService {
-    Access saveAccess (Access access);
+    Role saveAccess (Role role);
     void deleteAccess(Integer accessId);
-    List<Access> findAll();
+    List<Role> findAll();
 }

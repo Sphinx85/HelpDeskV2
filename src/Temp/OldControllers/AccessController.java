@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.brightway.HelpDeskV2.Entites.Access;
+import ru.brightway.HelpDeskV2.Entites.Role;
 import ru.brightway.HelpDeskV2.services.interfaces.AccessService;
 
 import java.util.List;
@@ -19,13 +19,13 @@ public class AccessController {
     private final AccessService accessService;
 
     @PostMapping("/save")
-    public Access saveAccess(@RequestBody Access access){
-        log.info("Save access: " + access);
-        return accessService.saveAccess(access);
+    public Role saveAccess(@RequestBody Role role){
+        log.info("Save access: " + role);
+        return accessService.saveAccess(role);
     }
 
     @GetMapping("/findAll")
-    public List<Access> findAllAccess(){
+    public List<Role> findAllAccess(){
         log.info("Find all access");
         return accessService.findAll();
     }

@@ -12,13 +12,20 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 public class Priority {
-    @Id
-    @Column(name = "id", nullable = false)
-    private Integer id;
 
-    @Column(name = "description")
+    @Id
+    private Integer id;
     private String description;
 
-    @OneToMany(mappedBy = "priority")
-    private Set<Message> messages = new LinkedHashSet<>();
+    @ManyToMany(mappedBy = "priorities")
+    private Set<Message> messages;
+//    @Id
+//    @Column(name = "id", nullable = false)
+//    private Integer id;
+//
+//    @Column(name = "description")
+//    private String description;
+//
+//    @OneToMany(mappedBy = "priority")
+//    private Set<Message> messages = new LinkedHashSet<>();
 }

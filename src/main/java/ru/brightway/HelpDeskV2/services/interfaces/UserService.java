@@ -8,4 +8,6 @@ public interface UserService {
     User saveUser (User user);
     void deleteUser(Integer userId);
     List<User> findAll();
+
+    User findByUsername(String nickname);
 }

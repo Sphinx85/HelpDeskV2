@@ -2,36 +2,63 @@ package ru.brightway.HelpDeskV2.Entites;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "\"user\"")
+@Table(name = "\"users\"")
 @Data
 @NoArgsConstructor
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "first_name")
+    private String username;
+
+    private String password;
+
     private String first_name;
 
-    @Column(name = "last_name")
     private String last_name;
 
-    @Column(name = "access_id", insertable = false, updatable = false)
-    private Integer access_id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "access_id")
-    private Access access;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles",
+    joinColumns = @JoinColumn(name = "user_id"),
+    inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
     @OneToMany(mappedBy = "user")
-    private Set<Message> messages = new LinkedHashSet<>();
+    private List<Message> messages;
 
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.getRoles();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

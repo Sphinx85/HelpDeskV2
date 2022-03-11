@@ -2,7 +2,7 @@ package ru.brightway.HelpDeskV2.services;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.brightway.HelpDeskV2.Entites.Access;
+import ru.brightway.HelpDeskV2.Entites.Role;
 import ru.brightway.HelpDeskV2.repository.AccessRepository;
 import ru.brightway.HelpDeskV2.services.interfaces.AccessService;
 
@@ -15,8 +15,8 @@ public class DefaultAccessService implements AccessService {
 
     private final AccessRepository accessRepository;
     @Override
-    public Access saveAccess(Access access) {
-        return accessRepository.save(access);
+    public Role saveAccess(Role role) {
+        return accessRepository.save(role);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class DefaultAccessService implements AccessService {
     }
 
     @Override
-    public List<Access> findAll() {
+    public List<Role> findAll() {
         return new ArrayList<>(accessRepository.findAll());
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.brightway.HelpDeskV2.Entites.Message;
 import ru.brightway.HelpDeskV2.services.interfaces.MessageService;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -25,7 +26,7 @@ public class MessageController {
     }
 
     @GetMapping("/all")
-    public List<Message> findAllMessages(){
+    public List<Message> findAllMessages(Principal principal){
         log.info("View all messages");
         return messageService.findAll();
     }

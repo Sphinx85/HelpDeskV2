@@ -8,4 +8,7 @@ public interface MessageService {
     Message saveMessage (Message message);
     void deleteMessage(Integer messageId);
     List<Message> findAll();
+
+
+
 }

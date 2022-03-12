@@ -17,8 +17,11 @@ public class Priority {
     private Integer id;
     private String description;
 
-    @ManyToMany(mappedBy = "priorities")
+    @OneToMany(mappedBy = "priority")
     private Set<Message> messages;
+
+//    @ManyToMany(mappedBy = "priorities")
+//    private Set<Message> messages;
 //    @Id
 //    @Column(name = "id", nullable = false)
 //    private Integer id;

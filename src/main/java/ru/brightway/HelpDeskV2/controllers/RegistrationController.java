@@ -13,7 +13,7 @@ import ru.brightway.HelpDeskV2.services.DefaultUserService;
 import javax.validation.Valid;
 
 //@Controller
-public class RegistrationController {
+//public class RegistrationController {
 
 //    @Autowired
 //    private DefaultUserService userService;
@@ -30,4 +30,4 @@ public class RegistrationController {
 //        userService.saveUser(userForm);
 //        return "redirect:/";
 //    }
-}
+//}

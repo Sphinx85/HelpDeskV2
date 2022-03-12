@@ -2,6 +2,7 @@ package ru.brightway.HelpDeskV2.Entites;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.property.access.spi.SetterMethodImpl;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
@@ -17,8 +18,11 @@ public class Type {
     private Integer id;
     private String description;
 
-    @ManyToMany(mappedBy = "types")
+    @OneToMany(mappedBy = "type")
     private Set<Message> messages;
+
+//    @ManyToMany(mappedBy = "types")
+//    private Set<Message> messages;
 //    @Id
 //    @Column(name = "id", nullable = false)
 //    private Integer id;

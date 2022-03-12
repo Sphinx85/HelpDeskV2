@@ -22,13 +22,21 @@ public class Message {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "type_id")
-    private Set<Type> types;
+    private Type type;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "priority_id")
-    private Set<Priority> priorities;
+    private Priority priority;
+
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "type_id")
+//    private Set<Type> types;
+
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "priority_id")
+//    private Set<Priority> priorities;
 
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)

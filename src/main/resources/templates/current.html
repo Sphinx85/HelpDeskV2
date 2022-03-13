@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.thymeleaf.org ">
 <head>
     <meta charset="UTF-8">
     <title>My messages</title>
@@ -7,7 +9,10 @@
 <body>
 <h1>Мои заявки</h1>
 
-<p th:each = "message : ${user.messages}">
+
+<button sec:authorize="hasRole('ADMIN')" onclick="window.location.href = '/admin/panel';">Admin Panel</button>
+
+<p th:each="message : ${user.messages}">
     <span th:text="${message.getDescription}"></span>
     <span th:text="${message.getType.getDescription}"></span>
     <span th:text="${message.getPriority.getDescription}"></span>

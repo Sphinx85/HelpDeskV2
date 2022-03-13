@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Details Message</title>
+</head>
+<body>
+<span th:text="${message.getId}"></span>
+<span th:text="${message.getDescription}"></span>
+<span th:text="${message.getType.getDescription}"></span>
+<span th:text="${message.getPriority.getDescription}"></span>
+</body>
+</html>

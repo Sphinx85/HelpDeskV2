@@ -11,11 +11,24 @@
 
 
 <button sec:authorize="hasRole('ADMIN')" onclick="window.location.href = '/admin/panel';">Admin Panel</button>
+<button sec:authorize="hasRole('SUPPORT')" onclick="window.location.href = '/support/panel';">Support Panel</button>
 
 <p th:each="message : ${user.messages}">
     <span th:text="${message.getDescription}"></span>
     <span th:text="${message.getType.getDescription}"></span>
     <span th:text="${message.getPriority.getDescription}"></span>
+    <span>
+<!--        <button th:action="@{/workplace/details}" th:method="post" th:value="${message.getId}" th:onclick = "window.location.href = '/workplace/details';">Details</button>-->
+        <button onclick="window.location.href = '/workplace/details/${message.getId}}';"  >Details</button>
+    </span>
+
+
+    <!--        <form th:action = "@{/workplace/details}" th:method="post">-->
+    <!--            <input name="id" type="hidden" th:value = "${message.getId}">-->
+    <!--    -->
+    <!--            <button  type="submit">Войти</button>-->
+    <!--        </form>-->
+
 </p>
 </body>
 </html>

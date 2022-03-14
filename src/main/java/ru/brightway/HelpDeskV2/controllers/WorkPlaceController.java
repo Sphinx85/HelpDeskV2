@@ -7,20 +7,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.brightway.HelpDeskV2.Entites.Message;
 import ru.brightway.HelpDeskV2.Entites.User;
+import ru.brightway.HelpDeskV2.services.interfaces.MessageService;
 import ru.brightway.HelpDeskV2.services.interfaces.UserService;
 
 import java.security.Principal;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 
 @Data
 @RequestMapping("/workplace")
+@CrossOrigin
 public class WorkPlaceController {
 
     @Autowired
     private UserService userService;
 
-    private static Integer idMessage;
+    @Autowired
+    private MessageService messageService;
 
 
 
@@ -28,21 +33,21 @@ public class WorkPlaceController {
     public String currentMessages(Principal principal, Model model){
         User user = userService.findByUsername(principal.getName());
         model.addAttribute(user);
-        return "current";
+        return "current" ;
     }
 
-    @PostMapping("/details")
-    public void messageId(@RequestBody Integer id){
-        idMessage = id;
-
-    }
+//    @PostMapping("/details/{id}")
+//    public void messageId(@PathVariable Integer id){
+//        idMessage = id;
+//    }
+//
 
     @GetMapping("/details/{id}")
-    public String messageDetails(Principal principal, Model model, @PathVariable Integer idMessage){
+    public String messageDetails(@PathVariable("id") Integer id, Principal principal, Model model){
         User user = userService.findByUsername(principal.getName());
-        Message message = user.getMessages().get(idMessage);
+        Optional<Message> messageResponse = messageService.findById(id);
+        Message message = messageResponse.get();
         model.addAttribute(message);
-
         return "details";
     }
 }

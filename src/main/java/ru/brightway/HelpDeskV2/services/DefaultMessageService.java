@@ -1,6 +1,7 @@
 package ru.brightway.HelpDeskV2.services;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.brightway.HelpDeskV2.Entites.Message;
 import ru.brightway.HelpDeskV2.repository.MessageRepository;
@@ -8,12 +9,14 @@ import ru.brightway.HelpDeskV2.services.interfaces.MessageService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class DefaultMessageService implements MessageService {
-
+    @Autowired
     private final MessageRepository messageRepository;
+
 
     @Override
     public Message saveMessage(Message message) {
@@ -28,6 +31,11 @@ public class DefaultMessageService implements MessageService {
     @Override
     public List<Message> findAll() {
         return new ArrayList<>(messageRepository.findAll());
+    }
+
+    @Override
+    public Optional<Message> findById(Integer id) {
+        return messageRepository.findById(id);
     }
 
 

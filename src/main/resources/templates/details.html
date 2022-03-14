@@ -5,9 +5,23 @@
     <title>Details Message</title>
 </head>
 <body>
-<span th:text="${message.getId}"></span>
-<span th:text="${message.getDescription}"></span>
-<span th:text="${message.getType.getDescription}"></span>
-<span th:text="${message.getPriority.getDescription}"></span>
+<h1 align="center">Детали заявки</h1>
+<hr>
+<p>
+    <label >Номер заявки: </label>
+    <span th:text="${message.getId}"></span>
+</p>
+<p>
+    <label>Содержимое заявки: </label>
+    <span th:text="${message.getDescription}"></span>
+</p>
+<p>
+    <label>Тип задачи: </label>
+    <span th:text="${message.getType.getDescription}"></span>
+</p>
+<p>
+    <label>Приоритет: </label>
+    <span th:text="${message.getPriority.getDescription}"></span>
+</p>
 </body>
 </html>

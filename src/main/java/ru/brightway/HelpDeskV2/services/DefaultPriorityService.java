@@ -8,6 +8,8 @@ import ru.brightway.HelpDeskV2.services.interfaces.PriorityService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class DefaultPriorityService implements PriorityService {
@@ -25,5 +27,10 @@ public class DefaultPriorityService implements PriorityService {
     @Override
     public List<Priority> findAll() {
         return new ArrayList<>(priorityRepository.findAll());
+    }
+
+    @Override
+    public Optional<Priority> findById(int id) {
+        return priorityRepository.findById(id);
     }
 }

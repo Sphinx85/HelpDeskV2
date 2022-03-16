@@ -8,6 +8,8 @@ import ru.brightway.HelpDeskV2.services.interfaces.TypeService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class DefaultTypeService implements TypeService {
@@ -26,5 +28,10 @@ public class DefaultTypeService implements TypeService {
     @Override
     public List<Type> findAll() {
         return new ArrayList<>(typeRepository.findAll());
+    }
+
+    @Override
+    public Optional<Type> findById(int id) {
+        return typeRepository.findById(id);
     }
 }

@@ -1,6 +1,7 @@
 package ru.brightway.HelpDeskV2.services;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.brightway.HelpDeskV2.Entites.Priority;
 import ru.brightway.HelpDeskV2.repository.PriorityRepository;
@@ -13,6 +14,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class DefaultPriorityService implements PriorityService {
+    @Autowired
     private final PriorityRepository priorityRepository;
     @Override
     public Priority savePriority(Priority priority) {

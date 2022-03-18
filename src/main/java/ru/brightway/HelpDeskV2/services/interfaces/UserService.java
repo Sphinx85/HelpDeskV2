@@ -3,6 +3,7 @@ package ru.brightway.HelpDeskV2.services.interfaces;
 import ru.brightway.HelpDeskV2.Entites.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     User saveUser (User user);
@@ -10,4 +11,9 @@ public interface UserService {
     List<User> findAll();
 
     User findByUsername(String nickname);
+
+
+    void update(User user);
+
+    Optional<User> findById(int id);
 }

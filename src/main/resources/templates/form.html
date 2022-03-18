@@ -1,0 +1,47 @@
+<!DOCTYPE HTML >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="application/json; charset=UTF-8" />
+    <th:title>Edit</th:title>
+</head>
+<body>
+    <div th:switch="${#root}">
+        <p th:case="'user'">
+            <th:form method="POST" th:action="@{/admin/newUser}"  action="#">
+                <th:p>Имя</th:p>
+                <input type="text" name="first_name" >
+                <br>
+                <th:p>Фамилия</th:p>
+                <input type="text" name="last_name" >
+                <br>
+                <th:p>Логин</th:p>
+                <input type="text" name="username" >
+                <br>
+                <th:p>Пароль</th:p>
+                <input type="text" name="password" >
+                <br>
+                <th:p>Роль</th:p>
+                <input type="text" name="role" >
+                <br>
+
+                <br>
+                <input type="submit" value="Отправить" />
+            </th:form>
+        </p>
+        <p th:case="type">
+            <th:form method="POST" th:action="@{/admin/newType}"  action="#">
+                <th:p>ID</th:p>
+                <input type="text" name="id" >
+                <br>
+                <th:p>description</th:p>
+                <input type="text" name="description" >
+
+                <br>
+                <input type="submit" value="Отправить" />
+            </th:form>
+        </p>
+
+    </div>
+
+</body>
+</html>

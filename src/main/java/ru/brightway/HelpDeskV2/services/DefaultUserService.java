@@ -19,6 +19,7 @@ import ru.brightway.HelpDeskV2.services.interfaces.UserService;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -64,6 +65,16 @@ public class DefaultUserService implements UserService, UserDetailsService {
     @Override
     public User findByUsername(String nickname) {
         return userRepository.findByUsername(nickname);
+    }
+
+    @Override
+    public void update(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
+    public Optional<User> findById(int id) {
+        return userRepository.findById(id);
     }
 
     @Override

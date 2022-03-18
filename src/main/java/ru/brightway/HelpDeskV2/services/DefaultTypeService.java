@@ -1,6 +1,7 @@
 package ru.brightway.HelpDeskV2.services;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.brightway.HelpDeskV2.Entites.Type;
 import ru.brightway.HelpDeskV2.repository.TypeRepository;
@@ -13,7 +14,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class DefaultTypeService implements TypeService {
-
+    @Autowired
     private final TypeRepository typeRepository;
     @Override
     public Type saveType(Type type) {

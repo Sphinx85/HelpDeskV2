@@ -16,6 +16,7 @@ import java.util.Optional;
 public class DefaultTypeService implements TypeService {
     @Autowired
     private final TypeRepository typeRepository;
+
     @Override
     public Type saveType(Type type) {
         return typeRepository.save(type);

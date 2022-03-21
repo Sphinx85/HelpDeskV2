@@ -5,9 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class HelpDeskV2Application {
-
 	public static void main(String[] args) {
 		SpringApplication.run(HelpDeskV2Application.class, args);
 	}
-
 }

@@ -10,6 +10,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Сущность пользователя
+ */
+
+@SuppressWarnings("com.haulmont.jpb.LombokDataInspection")
 @Entity
 @Table(name = "\"users\"")
 @Data

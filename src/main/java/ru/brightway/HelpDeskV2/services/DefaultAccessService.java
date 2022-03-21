@@ -17,8 +17,8 @@ public class DefaultAccessService implements AccessService {
     @Autowired
     private final AccessRepository accessRepository;
     @Override
-    public Role saveAccess(Role role) {
-        return accessRepository.save(role);
+    public void saveAccess(Role role) {
+        accessRepository.save(role);
     }
 
     @Override

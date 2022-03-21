@@ -27,28 +27,18 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class DefaultUserService implements UserService, UserDetailsService {
 
-
+    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
     private AccessRepository accessRepository;
+
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    public void setUserRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-    @Autowired
-    public void setAccessRepository(AccessRepository accessRepository) {
-        this.accessRepository = accessRepository;
-    }
-    @Autowired
-    public void setbCryptPasswordEncoder(BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
-
     @Override
-    public User saveUser(User user) {
-//        User userFromDB = userRepository.findByUsername(user.getUsername()); //Зачем это?
-        return userRepository.save(user);
+    public void saveUser(User user) {
+        userRepository.save(user);
     }
 
     @Override

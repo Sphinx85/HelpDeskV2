@@ -6,12 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MessageService {
-    Message saveMessage (Message message);
+    void saveMessage (Message message);
     void deleteMessage(Integer messageId);
     List<Message> findAll();
     Optional<Message> findById(Integer id);
-
-
-
-
 }

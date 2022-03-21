@@ -5,6 +5,15 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * Сущность заявки. Имеет поля:
+ * id заявки
+ * Описание
+ * id пользователя
+ * id типа
+ * id приоритета
+ */
+@SuppressWarnings("com.haulmont.jpb.LombokDataInspection")
 @Entity
 @Table(name = "\"messages\"")
 @Data
@@ -28,41 +37,4 @@ public class Message {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "priority_id")
     private Priority priority;
-
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "type_id")
-//    private Set<Type> types;
-
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "priority_id")
-//    private Set<Priority> priorities;
-
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "id", nullable = false)
-//    private Integer id;
-//
-//    @Column (name = "description")
-//    private String description;
-//
-//    @Column (name = "user_id", insertable = false, updatable = false)
-//    private Integer user_id;
-//
-//    @Column (name = "type_id",insertable = false, updatable = false)
-//    private Integer type_id;
-//
-//    @Column (name = "priority_id",insertable = false, updatable = false)
-//    private Integer priority_id;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "priority_id")
-//    private Priority priority;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "type_id")
-//    private Type type;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id")
-//    private User user;
 }

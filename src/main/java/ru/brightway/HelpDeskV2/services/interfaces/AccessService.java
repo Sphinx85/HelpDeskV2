@@ -6,9 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AccessService {
-    Role saveAccess (Role role);
+    void saveAccess (Role role);
     void deleteAccess(Integer accessId);
     List<Role> findAll();
-
     Optional<Role> findById(int role);
 }

@@ -17,10 +17,9 @@ public class DefaultMessageService implements MessageService {
     @Autowired
     private final MessageRepository messageRepository;
 
-
     @Override
-    public Message saveMessage(Message message) {
-        return messageRepository.save(message);
+    public void saveMessage(Message message) {
+        messageRepository.save(message);
     }
 
     @Override
@@ -37,8 +36,4 @@ public class DefaultMessageService implements MessageService {
     public Optional<Message> findById(Integer id) {
         return messageRepository.findById(id);
     }
-
-
-
-
 }

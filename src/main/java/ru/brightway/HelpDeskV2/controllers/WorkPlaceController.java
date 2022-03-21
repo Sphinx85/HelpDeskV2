@@ -2,7 +2,6 @@ package ru.brightway.HelpDeskV2.controllers;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,16 +13,15 @@ import ru.brightway.HelpDeskV2.services.interfaces.TypeService;
 import ru.brightway.HelpDeskV2.services.interfaces.UserService;
 
 import java.security.Principal;
-import java.util.List;
 import java.util.Optional;
 
+@SuppressWarnings("OptionalGetWithoutIsPresent")
 @Controller
-
 @Data
 @RequestMapping("/workplace")
 @CrossOrigin
 public class WorkPlaceController {
-
+    //Блок инъекций необходимых сервисов
     @Autowired
     private UserService userService;
 
@@ -36,6 +34,12 @@ public class WorkPlaceController {
     @Autowired
     private PriorityService priorityService;
 
+    /**
+     * Метод отображения главной страницы приложения
+     * @param principal Входной параметр принимает текущего пользователя
+     * @param model Входной параметр передает в модель текущего пользователя
+     * @return Возвращает основную страницу приложения current.html
+     */
     @GetMapping("/messages/current")
     public String currentMessages(Principal principal, Model model){
         User user = userService.findByUsername(principal.getName());
@@ -43,21 +47,26 @@ public class WorkPlaceController {
         return "current" ;
     }
 
-//    @PostMapping("/details/{id}")
-//    public void messageId(@PathVariable Integer id){
-//        idMessage = id;
-//    }
-//
-
+    /**
+     * Метод отображения деталей заявки. Карточка заявки.
+     * @param id Входной параметро принимает на вход из строки id заявки
+     * @param model Входной параметр вкладывает в модель текущую заявку
+     * @return Возвращает страницу details.html
+     */
     @GetMapping("/details/{id}")
-    public String messageDetails(@PathVariable("id") Integer id, Principal principal, Model model){
-        User user = userService.findByUsername(principal.getName());
+    public String messageDetails(@PathVariable("id") Integer id, Model model){
         Optional<Message> messageResponse = messageService.findById(id);
         Message message = messageResponse.get();
         model.addAttribute(message);
         return "details";
     }
 
+    /**
+     * Метод сохранения новой заявки. Работает как для быстрых, так и собственных заявок.
+     * @param description Входной параметр принимает сообщение
+     * @param principal Входной параметр принимает текущего пользователя
+     * @return Возвращает переадресацию на основную страницу программы
+     */
     @PostMapping("/message/save")
     public String quickMessage(@ModelAttribute(name = "description") String description, Principal principal){
         Message message = new Message();

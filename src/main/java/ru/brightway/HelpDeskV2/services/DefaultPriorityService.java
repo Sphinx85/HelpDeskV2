@@ -16,9 +16,10 @@ import java.util.Optional;
 public class DefaultPriorityService implements PriorityService {
     @Autowired
     private final PriorityRepository priorityRepository;
+
     @Override
-    public Priority savePriority(Priority priority) {
-        return priorityRepository.save(priority);
+    public void savePriority(Priority priority) {
+        priorityRepository.save(priority);
     }
 
     @Override

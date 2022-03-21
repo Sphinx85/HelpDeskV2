@@ -2,12 +2,18 @@ package ru.brightway.HelpDeskV2.Entites;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.property.access.spi.SetterMethodImpl;
 
-import javax.persistence.*;
-import java.util.LinkedHashSet;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.Set;
 
+/**
+ * Сущность типа заявок. Классификатор.
+ */
+
+@SuppressWarnings("com.haulmont.jpb.LombokDataInspection")
 @Entity
 @Table(name = "type")
 @Data
@@ -20,16 +26,4 @@ public class Type {
 
     @OneToMany(mappedBy = "type")
     private Set<Message> messages;
-
-//    @ManyToMany(mappedBy = "types")
-//    private Set<Message> messages;
-//    @Id
-//    @Column(name = "id", nullable = false)
-//    private Integer id;
-//
-//    @Column(name = "description")
-//    private String description;
-//
-//    @OneToMany(mappedBy = "type")
-//    private Set<Message> messages = new LinkedHashSet<>();
 }

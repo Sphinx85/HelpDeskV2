@@ -40,9 +40,7 @@
 
 
     <p th:case="types">
-        <p>
-            <button th:onclick="window.location.href = '/admin/form/type';" type="button">New Type</button>
-        </p>
+
         <p th:each="message : ${types}">
             <span th:text="${message.getId}"></span>
             <span th:text="${message.getDescription}"></span>
@@ -52,9 +50,7 @@
         </p>
 
     <p th:case="priorities">
-        <p>
-            <button th:onclick="window.location.href = '/admin/form/priority';" type="button">New Priority</button>
-        </p>
+
         <p th:each="message : ${priorities}">
             <span th:text="${message.getId}"></span>
             <span th:text="${message.getDescription}"></span>
@@ -64,9 +60,7 @@
         </p>
 
     <p th:case="roles">
-        <p>
-            <button th:onclick="window.location.href = '/admin/form/role';" type="button">New Role</button>
-        </p>
+
         <p th:each="message : ${roles}">
             <span th:text="${message.getId}"></span>
             <span th:text="${message.getRole}"></span>

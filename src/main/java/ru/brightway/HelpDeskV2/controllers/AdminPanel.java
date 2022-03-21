@@ -25,7 +25,7 @@ import java.util.Set;
 @RequestMapping("/admin")
 @CrossOrigin
 public class AdminPanel {
-    //Инъекция всех сервисов. Нужны администратору для настройки программы
+
     @Autowired
     private UserService userService;
 

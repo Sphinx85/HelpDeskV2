@@ -32,6 +32,8 @@ public class User implements UserDetails {
 
     private String last_name;
 
+    private boolean enable;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
     joinColumns = @JoinColumn(name = "user_id"),
@@ -64,6 +66,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enable;
     }
 }

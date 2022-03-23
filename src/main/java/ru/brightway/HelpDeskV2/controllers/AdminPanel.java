@@ -77,10 +77,10 @@ public class AdminPanel {
     public String form(@PathVariable(name = "typeModel") String typeModel,Model model){
         switch (typeModel){
             case "user":
-                model.addAttribute("user",new User());
+                model.addAttribute(new User());
 
             case "type":
-                model.addAttribute("type",new Type());
+                model.addAttribute(new Type());
 
             case "priority":
                 model.addAttribute(new Priority());

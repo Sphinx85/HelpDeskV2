@@ -3,8 +3,10 @@
 <head>
     <meta http-equiv="Content-Type" content="application/json; charset=UTF-8" />
     <th:title>Edit</th:title>
+    <link rel="stylesheet" href="../templates/style/style.css">
 </head>
 <body>
+<!--d-->
     <div th:switch="${#root}">
         <p th:case="'user'">
             <th:form method="POST" th:action="@{/admin/newUser}"  action="#">

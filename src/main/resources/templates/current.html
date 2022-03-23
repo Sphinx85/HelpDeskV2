@@ -6,52 +6,62 @@
     <title>My messages</title>
 <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
 <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>-->
+    <link rel="stylesheet" href="../templates/style/style.css">
 </head>
 <body>
-    <h1>Мои заявки</h1>
+    <main class="main">
+        <div class="left_block">
+            <h1 class="h1">Мои заявки</h1>
+<!--j-->
 
+            <button class="button_admin_panel" sec:authorize="hasRole('ADMIN')" onclick="window.location.href = '/admin/panel';">Admin Panel</button>
+            <button class="button_support_panel" sec:authorize="hasRole('SUPPORT')" onclick="window.location.href = '/support/panel';">Support Panel</button>
 
-    <button sec:authorize="hasRole('ADMIN')" onclick="window.location.href = '/admin/panel';">Admin Panel</button>
-    <button sec:authorize="hasRole('SUPPORT')" onclick="window.location.href = '/support/panel';">Support Panel</button>
+            <p th:each="message : ${user.messages}">
+            <span th:text="${message.getDescription}"></span>
+            <span th:text="${message.getType.getDescription}"></span>
+            <span th:text="${message.getPriority.getDescription}"></span>
+            <span>
+                <button th:onclick="window.location.href = '/workplace/details/[[${message.getId}]]';" type="button">Details</button>
+            </span>
+            </p>
+        </div>
+        <div class="right_block">
+            <h3>Быстрые заявки</h3>
 
-    <p th:each="message : ${user.messages}">
-        <span th:text="${message.getDescription}"></span>
-        <span th:text="${message.getType.getDescription}"></span>
-        <span th:text="${message.getPriority.getDescription}"></span>
-        <span>
-            <button th:onclick="window.location.href = '/workplace/details/[[${message.getId}]]';" type="button">Details</button>
-        </span>
-    </p>
-<hr>
-    <h3 align="center">Быстрые заявки</h3>
+            <form method="POST" th:action="@{/workplace/message/save}" >
 
+                <input class="button" type="hidden" name="description" value="Заменить картридж">
 
+                <input class="button" type="submit" value="Заменить картридж" >
+            </form>
 
+            <form method="POST" th:action="@{/workplace/message/save}" >
 
-        <form method="POST" th:action="@{/workplace/message/save}" >
+                <input class="button" type="hidden" name="description" value="Обновить программу">
 
-            <input type="hidden" name="description" value="Заменить картридж">
+                <input class="button" type="submit" value="Обновить программу" />
+            </form>
+        </div>  
 
-            <input type="submit" value="Заменить картридж" />
+    </main>
+   
+    <hr> 
+    <section class="section_forms">
+        <div class="section_forms_forms">
+            <h3 >Своя заявка</h3>
+            <form method="POST" th:action="@{/workplace/message/save}" >
+
+                <input type="text" name="description" >
+                <br>
+
+                <br>
+            <input class="button_mail" type="submit" value="Отправить" />
+        </div>
+        
         </form>
-
-        <form method="POST" th:action="@{/workplace/message/save}" >
-
-            <input type="hidden" name="description" value="Обновить программу">
-
-            <input type="submit" value="Обновить программу" />
-        </form>
-
-    <hr>
-    <h3 align="center">Своя заявка</h3>
-        <form method="POST" th:action="@{/workplace/message/save}" >
-
-            <input type="text" name="description" >
-            <br>
-
-            <br>
-            <input type="submit" value="Отправить" />
-        </form>
+    </section>
+    
 
 
 <!--        <form th:method="POST" th:action="@{/workplace/message/save}" th:object = "${message}">-->

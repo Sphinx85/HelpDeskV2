@@ -6,12 +6,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.brightway.HelpDeskV2.Entites.Message;
-import ru.brightway.HelpDeskV2.Entites.User;
 import ru.brightway.HelpDeskV2.services.interfaces.MessageService;
 import ru.brightway.HelpDeskV2.services.interfaces.UserService;
 
 import java.security.Principal;
-import java.util.List;
+
+/**
+ * Контроллер обработки запросов специалиста поддержки
+ */
 
 @SuppressWarnings("OptionalGetWithoutIsPresent")
 @Controller
@@ -34,11 +36,9 @@ public class SupportPanel {
      * @param model Входным параметром является модель, в которую помещается коллекция заявок из БД
      * @return Возвращает страницу allLists.html
      */
-    @GetMapping("/allMessages")
+    @GetMapping("/all")
     public String allMessages(Model model){
-        List<Message> freeMessages = messageService.findAll();
-        freeMessages.removeIf(message -> message.getSupport_id() != 0);
-        model.addAttribute("messages", freeMessages);
+        model.addAttribute("messages", messageService.findAll().removeIf(message -> message.getSupport_id() != 0 || !message.isActual()));
         return "allLists";
     }
 
@@ -50,8 +50,8 @@ public class SupportPanel {
      */
     @GetMapping("/current")
     public String currentMessages(Principal principal, Model model){
-        User user = userService.findByUsername(principal.getName());
-        model.addAttribute("currentMessages",user.getMessages());
+        int support_id = userService.findByUsername(principal.getName()).getId();
+        model.addAttribute("messages", messageService.findAll().removeIf(message -> message.getSupport_id() != support_id || !message.isActual()));
         return "allLists" ;
     }
 

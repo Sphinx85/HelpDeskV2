@@ -2,6 +2,7 @@ package ru.brightway.HelpDeskV2.Entites;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.brightway.HelpDeskV2.services.interfaces.UserService;
 
 import javax.persistence.*;
@@ -19,7 +20,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "\"messages\"")
 @Data
-
+@NoArgsConstructor
 public class Message {
 
     @Id
@@ -45,25 +46,4 @@ public class Message {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "priority_id")
     private Priority priority;
-
-    public Message() {
-        new StatusConstructor();
-    }
-
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
-    @Data
-    private class StatusConstructor{
-        UserService userService;
-        private StringBuilder status_complete;
-
-        public StatusConstructor() {
-            if (support_id == 0)
-                status = status_complete.append("Вашу заявку еще не приняли в работу").toString();
-            status = status_complete.append("Вашей заявкой занимается: ")
-                    .append(userService.findById(support_id).get().getFirst_name())
-                    .append(" ")
-                    .append(userService.findById(support_id).get().getLast_name())
-                    .append(".").toString();
-        }
-    }
 }

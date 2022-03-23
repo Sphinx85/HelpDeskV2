@@ -74,7 +74,27 @@ public class WorkPlaceController {
         message.setUser(userService.findByUsername(principal.getName()));
         message.setType(typeService.findById(1).get());
         message.setPriority(priorityService.findById(1).get());
+        message.setSupport_id(0);
+        message.setStatus(construct(message));
+        message.setActual(true);
         messageService.saveMessage(message);
         return "redirect:/workplace/messages/current";
+    }
+
+    /**
+     * Метод для отображения статуса заявки пользователю.
+     * @param message На вход метод принимает объект Message, для построения статуса на основе
+     *                идентификатора ответственного специалиста
+     * @return Возвращает строку. Готовый результат сборки статуса
+     */
+    private String construct(Message message){
+        StringBuilder status_complete = new StringBuilder();
+        if (message.getSupport_id() == 0)
+            return (status_complete.append("Вашу заявку еще не приняли в работу").toString());
+        return (status_complete.append("Вашей заявкой занимается: ")
+                .append(userService.findById(message.getSupport_id()).get().getFirst_name())
+                .append(" ")
+                .append(userService.findById(message.getSupport_id()).get().getLast_name())
+                .append(".").toString());
     }
 }

@@ -13,6 +13,7 @@ import ru.brightway.HelpDeskV2.Entites.User;
 import ru.brightway.HelpDeskV2.services.interfaces.*;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -60,7 +61,7 @@ public class AdminPanel {
      */
     @GetMapping("/allUsers")
     public String allUsers(Model model){
-        model.addAttribute("users", userService.findAll());
+        model.addAttribute("users", userService.findAll().removeIf(user -> !user.isEnabled()));
         return "allLists";
     }
 
@@ -156,6 +157,7 @@ public class AdminPanel {
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
         user.setRoles(roles);
+        user.setEnable(true);
         userService.saveUser(user);
         return "redirect:/admin/allUsers";
     }

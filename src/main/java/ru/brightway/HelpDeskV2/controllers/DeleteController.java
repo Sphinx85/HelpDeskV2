@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.brightway.HelpDeskV2.Entites.User;
 import ru.brightway.HelpDeskV2.services.interfaces.*;
 
 /**
  * Контроллер удаления записей из базы. Доступен только администратору.
  */
+
+@SuppressWarnings("OptionalGetWithoutIsPresent")
 @Controller
 @RequestMapping("/admin/delete")
 @Data
@@ -42,7 +45,9 @@ public class DeleteController {
      */
     @GetMapping("/user/{id}")
     public String deleteUser(@PathVariable(name = "id") Integer id){
-        userService.deleteUser(id);
+        User user = userService.findById(id).get();
+        user.setEnable(false);
+        userService.update(user);
         return "redirect:/admin/allUsers";
     }
 

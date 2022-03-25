@@ -7,12 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.brightway.HelpDeskV2.Entites.Message;
 import ru.brightway.HelpDeskV2.Entites.User;
-import ru.brightway.HelpDeskV2.services.interfaces.MessageService;
-import ru.brightway.HelpDeskV2.services.interfaces.PriorityService;
-import ru.brightway.HelpDeskV2.services.interfaces.TypeService;
-import ru.brightway.HelpDeskV2.services.interfaces.UserService;
+import ru.brightway.HelpDeskV2.services.interfaces.*;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 @SuppressWarnings("OptionalGetWithoutIsPresent")
@@ -34,6 +32,9 @@ public class WorkPlaceController {
     @Autowired
     private PriorityService priorityService;
 
+    @Autowired
+    private StatusBuilder statusBuilder;
+
     /**
      * Метод отображения главной страницы приложения
      * @param principal Входной параметр принимает текущего пользователя
@@ -43,6 +44,9 @@ public class WorkPlaceController {
     @GetMapping("/messages/current")
     public String currentMessages(Principal principal, Model model){
         User user = userService.findByUsername(principal.getName());
+        List<Message> messages = user.getMessages();
+        messages.removeIf(message -> !message.getActual());
+        user.setMessages(messages);
         model.addAttribute(user);
         return "current" ;
     }
@@ -75,26 +79,9 @@ public class WorkPlaceController {
         message.setType(typeService.findById(1).get());
         message.setPriority(priorityService.findById(1).get());
         message.setSupport_id(0);
-        message.setStatus(construct(message));
+        message.setStatus(statusBuilder.construct(message));
         message.setActual(true);
         messageService.saveMessage(message);
         return "redirect:/workplace/messages/current";
-    }
-
-    /**
-     * Метод для отображения статуса заявки пользователю.
-     * @param message На вход метод принимает объект Message, для построения статуса на основе
-     *                идентификатора ответственного специалиста
-     * @return Возвращает строку. Готовый результат сборки статуса
-     */
-    private String construct(Message message){
-        StringBuilder status_complete = new StringBuilder();
-        if (message.getSupport_id() == 0)
-            return (status_complete.append("Вашу заявку еще не приняли в работу").toString());
-        return (status_complete.append("Вашей заявкой занимается: ")
-                .append(userService.findById(message.getSupport_id()).get().getFirst_name())
-                .append(" ")
-                .append(userService.findById(message.getSupport_id()).get().getLast_name())
-                .append(".").toString());
     }
 }

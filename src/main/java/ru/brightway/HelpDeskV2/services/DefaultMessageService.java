@@ -36,4 +36,9 @@ public class DefaultMessageService implements MessageService {
     public Optional<Message> findById(Integer id) {
         return messageRepository.findById(id);
     }
+
+    @Override
+    public void update(Message message) {
+        messageRepository.save(message);
+    }
 }

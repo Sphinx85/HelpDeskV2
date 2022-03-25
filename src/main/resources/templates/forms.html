@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <link rel="stylesheet" href="/style/style.css">
+</head>
+    <body>
+        <div th:fragment="userForm">
+            <form method="POST" th:action="@{/admin/newUser}"  action="#">
+                <th:p>Имя</th:p>
+                <input type="text" name="first_name" >
+                <br>
+                <th:p>Фамилия</th:p>
+                <input type="text" name="last_name" >
+                <br>
+                <th:p>Логин</th:p>
+                <input type="text" name="username" >
+                <br>
+                <th:p>Пароль</th:p>
+                <input type="text" name="password" >
+                <br>
+                <th:p>Роль</th:p>
+                <input type="text" name="role" >
+                <br>
+
+                <br>
+                <input type="submit" value="Отправить" />
+            </form>
+        </div>
+        <div th:fragment="typeForm">
+            <th:form method="POST" th:action="@{/admin/newType}"  action="#">
+                <th:p>ID</th:p>
+                <input type="text" name="id" >
+                <br>
+                <th:p>description</th:p>
+                <input type="text" name="description" >
+
+                <br>
+                <input type="submit" value="Отправить" />
+            </th:form>
+        </div>
+        <div th:fragment="priorityForm">
+            <th:form method="POST" th:action="@{/admin/newPriority}"  action="#">
+                <th:p>ID</th:p>
+                <input type="text" name="id" >
+                <br>
+                <th:p>description</th:p>
+                <input type="text" name="description" >
+
+                <br>
+                <input type="submit" value="Отправить" />
+            </th:form>
+        </div>
+
+    </body>
+</html>

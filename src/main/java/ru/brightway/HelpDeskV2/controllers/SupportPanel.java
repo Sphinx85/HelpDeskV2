@@ -7,9 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.brightway.HelpDeskV2.Entites.Message;
 import ru.brightway.HelpDeskV2.services.interfaces.MessageService;
+import ru.brightway.HelpDeskV2.services.interfaces.StatusBuilder;
 import ru.brightway.HelpDeskV2.services.interfaces.UserService;
 
 import java.security.Principal;
+import java.util.List;
 
 /**
  * Контроллер обработки запросов специалиста поддержки
@@ -28,6 +30,13 @@ public class SupportPanel {
     @Autowired
     UserService userService;
 
+    @Autowired
+    StatusBuilder statusBuilder;
+
+    /**
+     * Метод входа в панель специалиста поддержки
+     * @return Возвращает панель поддержки
+     */
     @GetMapping("/panel")
     public String supportPanel(){return "supportPanel";}
 
@@ -38,7 +47,9 @@ public class SupportPanel {
      */
     @GetMapping("/all")
     public String allMessages(Model model){
-        model.addAttribute("messages", messageService.findAll().removeIf(message -> message.getSupport_id() != 0 || !message.isActual()));
+        List<Message> messages = messageService.findAll();
+        messages.removeIf(message -> message.getSupport_id() != 0 || !message.getActual());
+        model.addAttribute("messages", messages);
         return "allLists";
     }
 
@@ -51,7 +62,9 @@ public class SupportPanel {
     @GetMapping("/current")
     public String currentMessages(Principal principal, Model model){
         int support_id = userService.findByUsername(principal.getName()).getId();
-        model.addAttribute("messages", messageService.findAll().removeIf(message -> message.getSupport_id() != support_id || !message.isActual()));
+        List<Message> messages = messageService.findAll();
+        messages.removeIf(message -> message.getSupport_id() != support_id || !message.getActual());
+        model.addAttribute("messages", messages);
         return "allLists" ;
     }
 
@@ -63,10 +76,12 @@ public class SupportPanel {
      *                  для присвоения заявке параметра support_id
      * @return Возвращает переадресацию на страницу текущих заявок специалиста
      */
-    @PostMapping("/apply/{id}")
-    public String applyMessage(@RequestParam(name = "id") Integer message_id, Principal principal){
+    @GetMapping("/apply/{id}")
+    public String applyMessage(@PathVariable(name = "id") Integer message_id, Principal principal){
         Message message = messageService.findById(message_id).get();
         message.setSupport_id(userService.findByUsername(principal.getName()).getId());
+        message.setStatus(statusBuilder.construct(message));
+        messageService.update(message);
         return "redirect:/support/current";
     }
 
@@ -76,10 +91,11 @@ public class SupportPanel {
      * @param message_id Входной параметр принимает в запросе id заявки
      * @return Возвращает переадресацию на страницу текущих заявок специалиста
      */
-    @PostMapping("/complete/{id}")
-    public String completeMessage(@RequestParam(name = "id") Integer message_id){
+    @GetMapping("/complete/{id}")
+    public String completeMessage(@PathVariable(name = "id") Integer message_id){
         Message message = messageService.findById(message_id).get();
         message.setActual(false);
+        messageService.update(message);
         return "redirect:/support/current";
     }
 }

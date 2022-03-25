@@ -32,7 +32,7 @@ public class User implements UserDetails {
 
     private String last_name;
 
-    private boolean enable;
+    private Boolean enable;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",

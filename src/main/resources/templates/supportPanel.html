@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Support Panel</title>
+    <link rel="stylesheet" href="/style/style.css">
 </head>
 <body>
+<h1 align="center">Support Panel</h1>
 
+<button th:onclick="window.location.href = '/support/all';" type="button">All Messages</button><br><br>
+<button th:onclick="window.location.href = '/support/current';" type="button">My Messages</button><br><br>
 </body>
 </html>

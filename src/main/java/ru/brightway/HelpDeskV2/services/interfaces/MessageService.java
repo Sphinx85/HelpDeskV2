@@ -10,4 +10,6 @@ public interface MessageService {
     void deleteMessage(Integer messageId);
     List<Message> findAll();
     Optional<Message> findById(Integer id);
+
+    void update(Message message);
 }

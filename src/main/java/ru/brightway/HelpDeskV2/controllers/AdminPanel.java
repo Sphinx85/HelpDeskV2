@@ -61,7 +61,9 @@ public class AdminPanel {
      */
     @GetMapping("/allUsers")
     public String allUsers(Model model){
-        model.addAttribute("users", userService.findAll().removeIf(user -> !user.isEnabled()));
+        List<User> users = userService.findAll();
+        users.removeIf(user -> !user.getEnable());
+        model.addAttribute("users",  users);
         return "allLists";
     }
 
@@ -119,16 +121,16 @@ public class AdminPanel {
     public String form(@PathVariable(name = "typeModel") String typeModel,Model model){
         switch (typeModel){
             case "user":
-                model.addAttribute(new User());
+                User user = new User();
+                model.addAttribute("user",user);
 
             case "type":
-                model.addAttribute(new Type());
+                Type type = new Type();
+                model.addAttribute("type",type);
 
             case "priority":
-                model.addAttribute(new Priority());
-
-            case "role":
-                model.addAttribute(new Role());
+                Priority priority = new Priority();
+                model.addAttribute("priority",priority);
         }
         return "form";
     }
@@ -196,6 +198,7 @@ public class AdminPanel {
 
     /**
      * Метод создания новых ролей пользователя
+     * Метод не используется с версии 0.3.2
      * @param id Входной параметр принимает id роли пользователя. Может являться любым уникальным числом. Не является последовательностью.
      * @param description Входной параметр принимает название роли. Формат строго определен.
      *                    Перед названием роли необходимо ставить префикс 'ROLE_' а само название передавать

@@ -1,8 +1,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Messages</title>
+    <link rel="stylesheet" href="/style/style.css">
 </head>
 <body>
 
@@ -15,31 +17,43 @@
             <span th:text="${message.getType.getDescription}"></span>
             <span th:text="${message.getPriority.getDescription}"></span>
             <span th:text="${message.getUser.getFirst_name}"></span>
+            <span th:text="${message.getUser.getLast_name}"></span>
+            <span sec:authorize="hasRole('ADMIN')" th:if="${message.getActual}" th:text="${message.getStatus}"></span>
             <span>
                 <button th:onclick="window.location.href = '/workplace/details/[[${message.getId}]]';" type="button">Details</button>
             </span>
             <span>
-                <button th:method="delete" th:onclick="window.location.href = '/admin/delete/message/[[${message.getId}]]';" type="button">Delete</button>
+                <button th:method="delete" th:if="${message.getActual}" sec:authorize="hasRole('ADMIN')" th:onclick="window.location.href = '/admin/delete/message/[[${message.getId}]]';" type="button">Delete</button>
+            </span>
+            <span>
+                <button sec:authorize="hasRole('SUPPORT')" th:if="${message.getSupport_id} eq 0" th:onclick="window.location.href = '/support/apply/[[${message.getId}]]';" type="button">Apply</button>
+            </span>
+            <span>
+                <button sec:authorize="hasRole('SUPPORT')" th:unless="${message.getSupport_id} eq 0" th:onclick="window.location.href = '/support/complete/[[${message.getId}]]';" type="button">Complete</button>
             </span>
         </p>
 
 
     <p th:case="users">
-        <p>
+        <p th:if="${users}">
             <button th:onclick="window.location.href = '/admin/form/user';" type="button">New User</button>
 
         <p th:each="message : ${users}">
+
             <span th:text="${message.getId}"></span>
             <span th:text="${message.getFirst_name}"></span>
             <span th:text="${message.getLast_name}"></span>
             <span th:text="${message.getUsername}"></span>
                 <span>
-                    <button th:method="delete" th:onclick="window.location.href = '/admin/delete/user/[[${message.getId}]]';" type="button">Delete</button>
+                    <button th:method="delete" sec:authorize="hasRole('ADMIN')" th:onclick="window.location.href = '/admin/delete/user/[[${message.getId}]]';" type="button">Delete</button>
                 </span>
         </p>
 
 <!--ggh-->
     <p th:case="types">
+
+        <p th:if="${types}">
+            <button th:onclick="window.location.href = '/admin/form/type';" type="button">New Type</button>
 
         <p th:each="message : ${types}">
             <span th:text="${message.getId}"></span>
@@ -50,6 +64,9 @@
         </p>
 
     <p th:case="priorities">
+
+        <p th:if="${priorities}">
+            <button th:onclick="window.location.href = '/admin/form/priority';" type="button">New Priority</button>
 
         <p th:each="message : ${priorities}">
             <span th:text="${message.getId}"></span>
@@ -64,9 +81,7 @@
         <p th:each="message : ${roles}">
             <span th:text="${message.getId}"></span>
             <span th:text="${message.getRole}"></span>
-            <span>
-                <button th:onclick="window.location.href = '/admin/delete/role/[[${message.getId}]]';" type="button">Delete</button>
-            </span>
+
         </p>
 
 

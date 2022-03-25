@@ -18,9 +18,8 @@
             <button class="button_support_panel" sec:authorize="hasRole('SUPPORT')" onclick="window.location.href = '/support/panel';">Support Panel</button>
 
             <p th:each="message : ${user.messages}">
-            <span th:text="${message.getDescription}"></span>
-            <span th:text="${message.getType.getDescription}"></span>
-            <span th:text="${message.getPriority.getDescription}"></span>
+                <span th:text="${message.getDescription}"></span>
+                <span th:text="${message.getStatus}"></span>
             <span>
                 <button th:onclick="window.location.href = '/workplace/details/[[${message.getId}]]';" type="button">Details</button>
             </span>
@@ -61,54 +60,7 @@
         </form>
         </div>
     </section>
-    
-
-
-<!--        <form th:method="POST" th:action="@{/workplace/message/save}" th:object = "${message}">-->
-<!--            <input type="hidden" value="Заменить картридж"  name="description" >-->
-<!--            <input type="hidden" th:value="${user.getId}" name="user_id" >-->
-<!--            <input type="hidden" value="1" name="type_id" >-->
-<!--            <input type="hidden" value="1" name="priority_id" >-->
-<!--            <button type="submit">Заменить картридж</button>-->
-<!--        </form>-->
-
-<!--        <form action="#" th:action="@{/workplace/message/save}" th:object="${message}" method="post">-->
-<!--            <input type="text" th:field="*{description}"/>-->
-
-<!--            <button type="submit">Заменить картридж</button>-->
-<!--        </form>-->
-
-<!--    <form th:action="@{/workplace/message/save}" th:object="${message}" method="POST">-->
-
-<!--        <input type="hidden" th:field="*{description}" value="Заменить картридж"/>-->
-
-<!--        <input type="hidden" th:field="*{user_id}" value="${user.getId}"/>-->
-
-<!--        <input type="hidden" th:field="*{type_id}" value="1"/>-->
-
-<!--        <input type="hidden" th:field="*{priority_id}" value="1"/>-->
-
-<!--        <button type="submit">Заменить картридж</button>-->
-<!--    </form>-->
 </body>
 
 
 </html>
-
-<!--<span>-->
-<!--            <-->
-<!--            <form th:action="@{/workplace/details/${message.getId}}" th:method = "post" th:onclick = "window.location.href = '/workplace/details/${message.getId}}';">-->
-<!--                <button type="submit">Details</button>-->
-<!--            </form> -->
-<!--        </span>-->
-<!--    <span>-->
-<!--&lt;!&ndash;        <button th:action="@{/workplace/details}" th:method="post" th:value="${message.getId}" th:onclick = "window.location.href = '/workplace/details';">Details</button>&ndash;&gt;-->
-<!--        <button onclick="window.location.href = '/workplace/details/${message.getId}}';"  >Details</button>-->
-<!--    </span>-->
-
-
-<!--        <form th:action = "@{/workplace/details}" th:method="post">-->
-<!--            <input name="id" type="hidden" th:value = "${message.getId}">-->
-<!--    -->
-<!--            <button  type="submit">Войти</button>-->
-<!--        </form>-->

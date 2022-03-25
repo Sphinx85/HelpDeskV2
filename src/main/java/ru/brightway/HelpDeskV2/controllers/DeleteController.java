@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.brightway.HelpDeskV2.Entites.Message;
 import ru.brightway.HelpDeskV2.Entites.User;
 import ru.brightway.HelpDeskV2.services.interfaces.*;
 
@@ -53,6 +54,7 @@ public class DeleteController {
 
     /**
      * Метод удаления роли пользователя по id
+     * Метод не используется с версии 0.3.2
      * @param id Параметр из строки запроса ищет роль пользователя по id
      * @return Возвращает переадресацию на список ролей
      */
@@ -69,7 +71,9 @@ public class DeleteController {
      */
     @GetMapping("/message/{id}")
     public String deleteMessage(@PathVariable(name = "id") Integer id){
-        messageService.deleteMessage(id);
+        Message message = messageService.findById(id).get();
+        message.setActual(false);
+        messageService.update(message);
         return "redirect:/admin/allMessages";
     }
 

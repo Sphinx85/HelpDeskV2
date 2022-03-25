@@ -31,7 +31,7 @@ public class Message {
 
     private Integer support_id;
 
-    private boolean actual;
+    private Boolean actual;
 
     private String status;
 

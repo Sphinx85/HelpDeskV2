@@ -3,47 +3,12 @@
 <head>
     <meta http-equiv="Content-Type" content="application/json; charset=UTF-8" />
     <th:title>Edit</th:title>
-    <link rel="stylesheet" href="../templates/style/style.css">
+    <link rel="stylesheet" href="/style/style.css">
 </head>
 <body>
 <!--d-->
-    <div th:switch="${#root}">
-        <p th:case="'user'">
-            <th:form method="POST" th:action="@{/admin/newUser}"  action="#">
-                <th:p>Имя</th:p>
-                <input type="text" name="first_name" >
-                <br>
-                <th:p>Фамилия</th:p>
-                <input type="text" name="last_name" >
-                <br>
-                <th:p>Логин</th:p>
-                <input type="text" name="username" >
-                <br>
-                <th:p>Пароль</th:p>
-                <input type="text" name="password" >
-                <br>
-                <th:p>Роль</th:p>
-                <input type="text" name="role" >
-                <br>
-
-                <br>
-                <input type="submit" value="Отправить" />
-            </th:form>
-        </p>
-        <p th:case="type">
-            <th:form method="POST" th:action="@{/admin/newType}"  action="#">
-                <th:p>ID</th:p>
-                <input type="text" name="id" >
-                <br>
-                <th:p>description</th:p>
-                <input type="text" name="description" >
-
-                <br>
-                <input type="submit" value="Отправить" />
-            </th:form>
-        </p>
-
-    </div>
-
+    <div th:if="${user}" th:insert="forms::userForm"></div>
+    <div th:if="${type}" th:insert="forms::typeForm"></div>
+    <div th:if="${priority}" th:insert="forms::priorityForm"></div>
 </body>
 </html>

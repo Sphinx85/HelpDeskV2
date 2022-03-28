@@ -114,25 +114,21 @@ public class AdminPanel {
     /**
      * Метод создает модель того типа, которому необходимо заполнить форму.
      * @param typeModel В адресной строке передается параметр типа модели
-     * @param model В модель подается отправленный тип
-     * @return Возвращает страницу, содержащую формы form.html
+     * @return Возвращает страницу, содержащую формы formUser.html
      */
     @GetMapping("/form/{typeModel}")
-    public String form(@PathVariable(name = "typeModel") String typeModel,Model model){
+    public String form(@PathVariable(name = "typeModel") String typeModel){
         switch (typeModel){
             case "user":
-                User user = new User();
-                model.addAttribute("user",user);
+                return "formUser";
 
             case "type":
-                Type type = new Type();
-                model.addAttribute("type",type);
+                return "formType";
 
             case "priority":
-                Priority priority = new Priority();
-                model.addAttribute("priority",priority);
+                return "formPriority";
         }
-        return "form";
+        return "redirect:/workplace/current";
     }
 
     /**

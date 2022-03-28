@@ -6,6 +6,7 @@
     <title>My messages</title>
 <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
 <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="/style/style.css">
 </head>
 <body class="dotted">
@@ -17,13 +18,24 @@
             <button class="button_admin_panel item-application" sec:authorize="hasRole('ADMIN')" onclick="window.location.href = '/admin/panel';">Admin Panel</button>
             <button class="button_support_panel item-application" sec:authorize="hasRole('SUPPORT')" onclick="window.location.href = '/support/panel';">Support Panel</button>
 
-            <p th:each="message : ${user.messages}">
-                <span th:text="${message.getDescription}"></span>
-                <span th:text="${message.getStatus}"></span>
-            <span>
-                <button th:onclick="window.location.href = '/workplace/details/[[${message.getId}]]';" type="button">Details</button>
-            </span>
-            </p>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Содержание</th>
+                    <th scope="col">Статус</th>
+                    <th scope="col">Действия</th>
+                </tr>
+                </thead>
+                <tbody th:each="message : ${user.messages}">
+                <tr>
+                    <td th:text="${message.getDescription}"></td>
+                    <td th:text="${message.getStatus}"></td>
+                    <td>
+                        <button th:onclick="window.location.href = '/workplace/details/[[${message.getId}]]';" type="button">Details</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
         <div class="right_block">
             <h3>Быстрые заявки</h3>
@@ -61,6 +73,7 @@
         </form>
         </div>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
 
 

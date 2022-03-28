@@ -29,7 +29,7 @@
             </form>
         </div>
         <div th:fragment="typeForm">
-            <th:form method="POST" th:action="@{/admin/newType}"  action="#">
+            <form method="POST" th:action="@{/admin/newType}"  action="#">
                 <th:p>ID</th:p>
                 <input type="text" name="id" >
                 <br>
@@ -38,10 +38,10 @@
 
                 <br>
                 <input type="submit" value="Отправить" />
-            </th:form>
+            </form>
         </div>
         <div th:fragment="priorityForm">
-            <th:form method="POST" th:action="@{/admin/newPriority}"  action="#">
+            <form method="POST" th:action="@{/admin/newPriority}"  action="#">
                 <th:p>ID</th:p>
                 <input type="text" name="id" >
                 <br>
@@ -50,7 +50,7 @@
 
                 <br>
                 <input type="submit" value="Отправить" />
-            </th:form>
+            </form>
         </div>
 
     </body>

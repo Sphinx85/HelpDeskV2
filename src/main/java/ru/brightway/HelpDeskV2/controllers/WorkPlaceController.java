@@ -13,6 +13,9 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Контроллер для работы пользователя. Основной функционал программы.
+ */
 @SuppressWarnings("OptionalGetWithoutIsPresent")
 @Controller
 @Data

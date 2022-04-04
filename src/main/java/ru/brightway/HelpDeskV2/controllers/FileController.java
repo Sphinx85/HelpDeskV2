@@ -30,13 +30,11 @@ public class FileController {
     /**
      * Метод загрузки файлов
      * @param file Принимает файл
-     * @param redirectAttributes Входящий атрибут переадресации.
      * @return После добавления файла на сервер переадресовывает на главную страницу
      */
     @PostMapping("/admin/upload")
-    public String uploadFile(@RequestParam("file")MultipartFile file, RedirectAttributes redirectAttributes){
+    public String uploadFile(@RequestParam("file")MultipartFile file){
         fileService.uploadFile(file);
-        redirectAttributes.addFlashAttribute("message","You successfully uploaded " + file.getOriginalFilename() + "!");
         return "redirect:/";
     }
 }

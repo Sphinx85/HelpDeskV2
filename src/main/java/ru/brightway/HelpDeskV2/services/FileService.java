@@ -22,20 +22,25 @@ public class FileService {
     /**
      * Значение параметра пути для загрузки
      */
-    @Value("${app.upload.dir}")
-    public String uploadDir;
+
+    public static final String LOGO_DIRECTORY = "src/main/resources/static/upload/logo/";
 
     /**
      * Метод для загрузки файлов на сервер
      * @param file Принимает файл для загрузки
      */
-    public void uploadFile(MultipartFile file){
+    public String uploadFile(MultipartFile file){
+        if (file.isEmpty()){
+            return "";
+        }
+        String fileName = "logo.png";
         try {
-            Path copyLocation = Paths
-                    .get(uploadDir + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
-            Files.copy(file.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
+            Path path = Paths.get(LOGO_DIRECTORY + fileName);
+            file.transferTo(path);
+
         } catch (Exception e){
             e.printStackTrace();
         }
+        return fileName;
     }
 }

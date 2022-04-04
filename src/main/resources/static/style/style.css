@@ -42,7 +42,7 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 }
 
 body {
-	background: url('../../../../../abrut/WhatsApp_Image_2022-03-29_at_11.03.46-removebg-preview.png'), rgba(255,255,255,0.5); /* -----тут поменяй расположение картинки, в зависимости куда ее запихнёшь----- */
+	background: url('/upload/logo/logo.png'), rgba(255,255,255,0.5); /* -----тут поменяй расположение картинки, в зависимости куда ее запихнёшь----- */
 	background-blend-mode: color;
 
 	background-position: center center;

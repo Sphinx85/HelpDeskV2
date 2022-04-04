@@ -1,82 +1,127 @@
 <!DOCTYPE html>
-<html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
+<html
+  xmlns:sec="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.w3.org/1999/xhtml"
+>
+  <head>
     <meta http-equiv="Content-Type" content="application/json; charset=UTF-8" />
 
     <title>My messages</title>
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
-<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="/style/style.css">
-    <!-- <link rel="stylesheet" href="../static/style/style.css"> -->
-</head>
- <body class="dotted"> 
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+    <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <!-- <link rel="stylesheet" href="/style/style.css"> -->
+    <link rel="stylesheet" href="../static/style/style.css" />
+    <!-- проверка ветки -->
+  </head>
+  <body class="dotted">
     <main class="main">
-        <div class="left_block">
-            <h1 class="h1 header-text">Мои заявки</h1>
+      <div class="left_block">
+        <h1 class="h1 header-text">Мои заявки</h1>
 
-            <button class="button_admin_panel item-application" sec:authorize="hasRole('ADMIN')" onclick="window.location.href = '/admin/panel';">Admin Panel</button>
-            <button class="button_support_panel item-application" sec:authorize="hasRole('SUPPORT')" onclick="window.location.href = '/support/panel';">Support Panel</button>
+        <button
+          class="button_admin_panel item-application"
+          sec:authorize="hasRole('ADMIN')"
+          onclick="window.location.href = '/admin/panel';"
+        >
+          Admin Panel
+        </button>
+        <button
+          class="button_support_panel item-application"
+          sec:authorize="hasRole('SUPPORT')"
+          onclick="window.location.href = '/support/panel';"
+        >
+          Support Panel
+        </button>
 
-            <table class="table table-striped table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">Содержание</th>
-                    <th scope="col">Статус</th>
-                    <th scope="col">Действия</th>
-                </tr>
-                </thead>
-                <tbody th:each="message : ${user.messages}">
-                <tr>
-                    <td th:text="${message.getDescription}"></td>
-                    <td th:text="${message.getStatus}"></td>
-                    <td>
-                        <button th:onclick="window.location.href = '/workplace/details/[[${message.getId}]]';" type="button">Details</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="central-block"></div>
-        <div class="right_block">
-            <h3 class="header-text">Быстрые заявки</h3>
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Содержание</th>
+              <th scope="col">Статус</th>
+              <th scope="col">Действия</th>
+            </tr>
+          </thead>
+          <tbody th:each="message : ${user.messages}">
+            <tr>
+              <td th:text="${message.getDescription}"></td>
+              <td th:text="${message.getStatus}"></td>
+              <td>
+                <button
+                  th:onclick="window.location.href = '/workplace/details/[[${message.getId}]]';"
+                  type="button"
+                >
+                  Details
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="central-block"></div>
+      <div class="right_block">
+        <h3 class="header-text">Быстрые заявки</h3>
 
-            <form class="item-application" method="POST" th:action="@{/workplace/message/save}" >
+        <form
+          class="item-application"
+          method="POST"
+          th:action="@{/workplace/message/save}"
+        >
+          <input
+            class="button"
+            type="hidden"
+            name="description"
+            value="Заменить картридж"
+          />
 
-                <input class="button" type="hidden" name="description" value="Заменить картридж">
+          <input class="button" type="submit" value="Заменить картридж" />
+        </form>
 
-                <input class="button" type="submit" value="Заменить картридж" >
-            </form>
+        <form
+          class="item-application"
+          method="POST"
+          th:action="@{/workplace/message/save}"
+        >
+          <input
+            class="button"
+            type="hidden"
+            name="description"
+            value="Обновить программу"
+          />
 
-            <form class="item-application" method="POST" th:action="@{/workplace/message/save}" >
-
-                <input class="button" type="hidden" name="description" value="Обновить программу">
-
-                <input class="button" type="submit" value="Обновить программу" />
-            </form>
-        </div>  
-
+          <input class="button" type="submit" value="Обновить программу" />
+        </form>
+      </div>
     </main>
-   
 
     <section class="section_forms">
-        <div class="left-section-form-null"></div>
-        <div class="left-section-form-null"></div>
-        <div class="section_forms_forms">
-            <h3 class="header-text">Своя заявка</h3>
-            <form method="POST" th:action="@{/workplace/message/save}" >
+      <div class="left-section-form-null"></div>
+      <div class="left-section-form-null"></div>
+      <div class="section_forms_forms">
+        <h3 class="header-text">Своя заявка</h3>
+        <form method="POST" th:action="@{/workplace/message/save}">
+          <input
+            class="section_forms_input"
+            type="text"
+            name="description"
+            placeholder=" Чем я могу вам помочь?"
+          />
+          <br />
 
-                <input class="section_forms_input" type="text" name="description" placeholder=" Чем я могу вам помочь?">
-                <br>
-
-                <br>
-                <input class="button_mail" type="submit" value="Отправить" />
-
-            </form>
-        </div>
+          <br />
+          <input class="button_mail" type="submit" value="Отправить" />
+        </form>
+      </div>
     </section>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-</body>
-
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

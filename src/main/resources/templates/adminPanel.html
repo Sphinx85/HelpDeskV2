@@ -1,17 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>AdminPanel</title>
-    <link rel="stylesheet" href="/style/style.css">
-</head>
-<body>
-<h1 align="center">Admin Panel</h1>
+    <link rel="stylesheet" href="/style/style.css" />
+    <!-- <link rel="stylesheet" href="../static/style/style.css" /> -->
+  </head>
+  <body>
+    <h1 align="center">Admin Panel</h1>
 
-    <button th:onclick="window.location.href = '/admin/allUsers';" type="button">Users Management</button><br><br>
-    <button th:onclick="window.location.href = '/admin/allMessages';" type="button">Messages Management</button><br><br>
-    <button th:onclick="window.location.href = '/admin/allTypes';" type="button">Types Management</button><br><br>
-    <button th:onclick="window.location.href = '/admin/allPriorities';" type="button">Priorities Management</button><br><br>
-    <button th:onclick="window.location.href = '/admin/allRoles';" type="button">View Roles</button>
-</body>
+    <button
+      th:onclick="window.location.href = '/admin/allUsers';"
+      type="button"
+    >
+      Users Management</button
+    ><br /><br />
+    <button
+      th:onclick="window.location.href = '/admin/allMessages';"
+      type="button"
+    >
+      Messages Management</button
+    ><br /><br />
+    <button
+      th:onclick="window.location.href = '/admin/allTypes';"
+      type="button"
+    >
+      Types Management</button
+    ><br /><br />
+    <button
+      th:onclick="window.location.href = '/admin/allPriorities';"
+      type="button"
+    >
+      Priorities Management</button
+    ><br /><br />
+    <button
+      th:onclick="window.location.href = '/admin/allRoles';"
+      type="button"
+    >
+      View Roles
+    </button>
+  </body>
 </html>

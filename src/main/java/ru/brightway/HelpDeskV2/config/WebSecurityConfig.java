@@ -10,16 +10,21 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ru.brightway.HelpDeskV2.services.DefaultUserService;
 
+/**
+ * Параметры защищенных зон приложения, аутентификации и http
+ */
 @SuppressWarnings("Lombok")
 @EnableWebSecurity
 @Data
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
+    /**
+     * Инъекция сервиса пользователей
+     */
     @Autowired
     private DefaultUserService userService;
 
     /**
-     * Бин для хэширования паролей
+     * Бин для хеширования паролей
      * @return Шифровальщик для паролей
      */
     @Bean
@@ -31,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * Конфигурация HTTP
      * Защищенными областями приложения являются все области.
      * С приложением может работать только авторизованный пользователь
-     * @param httpSecurity на вход. Стандартное исполнение
+     * @param httpSecurity На вход. Стандартное исполнение
      * @throws Exception стандартное исполнение обработки исключений
      */
     @Override

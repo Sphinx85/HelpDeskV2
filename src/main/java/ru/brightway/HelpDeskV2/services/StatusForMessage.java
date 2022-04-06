@@ -7,6 +7,9 @@ import ru.brightway.HelpDeskV2.Entites.Message;
 import ru.brightway.HelpDeskV2.services.interfaces.StatusBuilder;
 import ru.brightway.HelpDeskV2.services.interfaces.UserService;
 
+/**
+ * Сервис генерации статусов заявок для отображения пользователю.
+ */
 @SuppressWarnings("OptionalGetWithoutIsPresent")
 @Service
 @AllArgsConstructor

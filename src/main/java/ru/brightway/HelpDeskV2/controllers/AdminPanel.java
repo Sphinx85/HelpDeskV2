@@ -12,6 +12,7 @@ import ru.brightway.HelpDeskV2.Entites.Type;
 import ru.brightway.HelpDeskV2.Entites.User;
 import ru.brightway.HelpDeskV2.services.interfaces.*;
 
+import java.security.Principal;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -45,12 +46,16 @@ public class AdminPanel {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
+    private ModelService modelService;
+
     /**
      * Метод отображения панели администратора.
      * @return Возвращает страницу adminPanel.html
      */
     @GetMapping("/panel")
-    public String adminPanel(){
+    public String adminPanel(Principal principal, Model model){
+        modelService.inject(principal,model);
         return "adminPanel";
     }
 
@@ -60,10 +65,11 @@ public class AdminPanel {
      * @return Возвращает страницу allLists.html
      */
     @GetMapping("/allUsers")
-    public String allUsers(Model model){
+    public String allUsers(Principal principal, Model model){
         List<User> users = userService.findAll();
         users.removeIf(user -> !user.getEnable());
         model.addAttribute("users",  users);
+        modelService.inject(principal,model);
         return "allLists";
     }
 
@@ -73,8 +79,9 @@ public class AdminPanel {
      * @return Возвращает страницу allLists.html
      */
     @GetMapping("/allMessages")
-    public String allMessages(Model model){
+    public String allMessages(Principal principal, Model model){
         model.addAttribute("messages", messageService.findAll());
+        modelService.inject(principal,model);
         return "allLists";
     }
 
@@ -84,8 +91,9 @@ public class AdminPanel {
      * @return Возвращает страницу allLists.html
      */
     @GetMapping("/allTypes")
-    public String allTypes(Model model){
+    public String allTypes(Principal principal, Model model){
         model.addAttribute("types", typeService.findAll());
+        modelService.inject(principal,model);
         return "allLists";
     }
 
@@ -95,8 +103,9 @@ public class AdminPanel {
      * @return Возвращает страницу allLists.html
      */
     @GetMapping("/allPriorities")
-    public String allPriorities(Model model){
+    public String allPriorities(Principal principal, Model model){
         model.addAttribute("priorities", priorityService.findAll());
+        modelService.inject(principal,model);
         return "allLists";
     }
 
@@ -106,26 +115,30 @@ public class AdminPanel {
      * @return Возвращает страницу allLists.html
      */
     @GetMapping("/allRoles")
-    public String allRoles(Model model){
+    public String allRoles(Principal principal, Model model){
         model.addAttribute("roles", accessService.findAll());
+        modelService.inject(principal,model);
         return "allLists";
     }
 
     /**
      * Метод создает модель того типа, которому необходимо заполнить форму.
      * @param typeModel В адресной строке передается параметр типа модели
-     * @return Возвращает страницу, содержащую формы formUser.html
+     * @return Возвращает страницу, содержащую формы
      */
     @GetMapping("/form/{typeModel}")
-    public String form(@PathVariable(name = "typeModel") String typeModel){
+    public String form(@PathVariable(name = "typeModel") String typeModel, Principal principal, Model model){
         switch (typeModel){
             case "user":
+                modelService.inject(principal,model);
                 return "formUser";
 
             case "type":
+                modelService.inject(principal,model);
                 return "formType";
 
             case "priority":
+                modelService.inject(principal,model);
                 return "formPriority";
         }
         return "redirect:/workplace/current";
@@ -285,7 +298,7 @@ public class AdminPanel {
      *                    в верхнем регистре. Например: ROLE_USER
      * @return Возвращает переадресацию на список всех ролей пользователей
      */
-    @PutMapping("/upRole/{id}")
+    @PostMapping("/upRole/{id}")
     public String upRole(@PathVariable("id") int idRole,
                          @ModelAttribute(name = "id") int id,
                           @ModelAttribute(name = "description") String description){

@@ -9,23 +9,23 @@
         <div th:fragment="userForm">
             <form method="POST" th:action="@{/admin/newUser}"  action="#">
                 <th:p>Имя</th:p>
-                <input type="text" name="first_name" >
+                <input type="text" class="section_forms_input" name="first_name" >
                 <br>
                 <th:p>Фамилия</th:p>
-                <input type="text" name="last_name" >
+                <input type="text" class="section_forms_input" name="last_name" >
                 <br>
                 <th:p>Логин</th:p>
-                <input type="text" name="username" >
+                <input type="text" class="section_forms_input" name="username" >
                 <br>
                 <th:p>Пароль</th:p>
-                <input type="text" name="password" >
+                <input type="text" class="section_forms_input" name="password" >
                 <br>
                 <th:p>Роль</th:p>
-                <input type="text" name="role" >
+                <input type="text" class="section_forms_input" name="role" >
                 <br>
 
                 <br>
-                <input type="submit" value="Отправить" />
+                <input type="submit" class="button" value="Отправить" />
             </form>
         </div>
         <div th:fragment="typeForm">
@@ -37,7 +37,7 @@
                 <input type="text" name="description" >
 
                 <br>
-                <input type="submit" value="Отправить" />
+                <input type="submit" class="button" value="Отправить" />
             </form>
         </div>
         <div th:fragment="priorityForm">
@@ -49,7 +49,7 @@
                 <input type="text" name="description" >
 
                 <br>
-                <input type="submit" value="Отправить" />
+                <input type="submit" class="button" value="Отправить" />
             </form>
         </div>
 

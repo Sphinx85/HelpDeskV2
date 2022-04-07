@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.brightway.HelpDeskV2.Entites.Message;
 import ru.brightway.HelpDeskV2.services.interfaces.MessageService;
+import ru.brightway.HelpDeskV2.services.interfaces.ModelService;
 import ru.brightway.HelpDeskV2.services.interfaces.StatusBuilder;
 import ru.brightway.HelpDeskV2.services.interfaces.UserService;
 
@@ -25,20 +26,26 @@ import java.util.List;
 public class SupportPanel {
 
     @Autowired
-    MessageService messageService;
+    private MessageService messageService;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    StatusBuilder statusBuilder;
+    private StatusBuilder statusBuilder;
+
+    @Autowired
+    private ModelService modelService;
 
     /**
      * Метод входа в панель специалиста поддержки
      * @return Возвращает панель поддержки
      */
     @GetMapping("/panel")
-    public String supportPanel(){return "supportPanel";}
+    public String supportPanel(Principal principal, Model model){
+        modelService.inject(principal,model);
+        return "supportPanel";
+    }
 
     /**
      * Метод отрисовки списка всех не взятых в работу заявок.
@@ -46,10 +53,11 @@ public class SupportPanel {
      * @return Возвращает страницу allLists.html
      */
     @GetMapping("/all")
-    public String allMessages(Model model){
+    public String allMessages(Principal principal, Model model){
         List<Message> messages = messageService.findAll();
         messages.removeIf(message -> message.getSupport_id() != 0 || !message.getActual());
         model.addAttribute("messages", messages);
+        modelService.inject(principal,model);
         return "allLists";
     }
 
@@ -65,6 +73,7 @@ public class SupportPanel {
         List<Message> messages = messageService.findAll();
         messages.removeIf(message -> message.getSupport_id() != support_id || !message.getActual());
         model.addAttribute("messages", messages);
+        modelService.inject(principal,model);
         return "allLists" ;
     }
 

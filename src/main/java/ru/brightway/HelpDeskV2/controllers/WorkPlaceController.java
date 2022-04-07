@@ -39,6 +39,9 @@ public class WorkPlaceController {
     @Autowired
     private StatusBuilder statusBuilder;
 
+    @Autowired
+    private ModelService modelService;
+
     /**
      * Метод отображения главной страницы приложения
      * @param principal Входной параметр принимает текущего пользователя
@@ -62,10 +65,11 @@ public class WorkPlaceController {
      * @return Возвращает страницу details.html
      */
     @GetMapping("/details/{id}")
-    public String messageDetails(@PathVariable("id") Integer id, Model model){
+    public String messageDetails(@PathVariable("id") Integer id, Model model, Principal principal){
         Optional<Message> messageResponse = messageService.findById(id);
         Message message = messageResponse.get();
         model.addAttribute(message);
+        modelService.inject(principal,model);
         return "details";
     }
 

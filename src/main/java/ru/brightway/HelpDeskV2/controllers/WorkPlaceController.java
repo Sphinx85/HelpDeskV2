@@ -62,7 +62,7 @@ public class WorkPlaceController {
      * Метод отображения деталей заявки. Карточка заявки.
      * @param id Входной параметро принимает на вход из строки id заявки
      * @param model Входной параметр вкладывает в модель текущую заявку
-     * @return Возвращает страницу details.html
+     * @return Возвращает страницу
      */
     @GetMapping("/details/{id}")
     public String messageDetails(@PathVariable("id") Integer id, Model model, Principal principal){

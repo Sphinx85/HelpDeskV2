@@ -16,128 +16,100 @@
 <div th:switch = "${#root}" class="left_block" >
 
     <p th:case = "messages">
-    <table th:if="${messages}" class="table table-striped table-hover ">
-        <thead class="table-dark">
-            <tr>
-                <th scope="col">Message Id</th>
-                <th scope="col">Description</th>
-                <th scope="col">Classification</th>
-                <th scope="col">Priority</th>
-                <th scope="colgroup">User</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody th:each="message : ${messages}">
-            <tr>
-                <td th:text="${message.getId}"></td>
-                <td th:text="${message.getDescription}"></td>
-                <td th:text="${message.getType.getDescription}"></td>
-                <td th:text="${message.getPriority.getDescription}"></td>
-                <td>
-                    <span th:text="${message.getUser.getFirst_name}"></span>
-                    <span th:text="${message.getUser.getLast_name}"></span>
-                </td>
-                <td>
-                    <button th:onclick="window.location.href = '/workplace/details/[[${message.getId}]]';" type="button">Details</button>
-                    <button th:method="delete" th:if="${message.getActual}" sec:authorize="hasRole('ADMIN')" th:onclick="window.location.href = '/admin/delete/message/[[${message.getId}]]';" type="button">Delete</button>
-                    <button sec:authorize="hasRole('SUPPORT')" th:if="${message.getSupport_id} eq 0" th:onclick="window.location.href = '/support/apply/[[${message.getId}]]';" type="button">Apply</button>
-                    <button sec:authorize="hasRole('SUPPORT')" th:unless="${message.getSupport_id} eq 0" th:onclick="window.location.href = '/support/complete/[[${message.getId}]]';" type="button">Complete</button>
-                </td>
-
-            </tr>
-        </tbody>
-
-    </table>
-
-<!--    th:onclick="window.location.href = '/admin/form/user';"-->
+        <div th:if="${messages}" >
+            <div th:each="message : ${messages}">
+                <div class="card">
+                    <div class="card-body m-2">
+                        <h4 class="card-header" th:text="${message.getDescription}">a</h4>
+                        <a class="button" data-bs-toggle="collapse" th:href="'#content' + ${message.getId}" role="button" aria-expanded="false" aria-controls="content">Детали</a>
+                        <div class="card-text collapse" th:id="'content' + ${message.getId}">
+                            <label for="id">Номер заявки</label>
+                            <p id="id" th:text="${message.getId}">a</p>
+                            <label for="status">Статус заявки</label>
+                            <p id="status" th:text="${message.getStatus}">a</p>
+                            <label for="type">Тип неполадки</label>
+                            <p id="type" th:text="${message.getType.getDescription}">a</p>
+                            <label for="priority">Приоритет</label>
+                            <p id="priority" th:text="${message.getPriority.getDescription}">a</p>
+                            <label for="user">Автор</label>
+                            <p id="user">
+                                <span th:text="${message.getUser.getFirst_name}"></span>
+                                <span th:text="${message.getUser.getLast_name}"></span>
+                            </p>
+                            <button th:if="${message.getActual}" sec:authorize="hasRole('ADMIN')" th:onclick="window.location.href = '/admin/delete/message/[[${message.getId}]]';" type="button">Удалить</button>
+                            <button sec:authorize="hasRole('SUPPORT')" th:if="${message.getSupport_id} eq 0" th:onclick="window.location.href = '/support/apply/[[${message.getId}]]';" type="button">Взять в работу</button>
+                            <button sec:authorize="hasRole('SUPPORT')" th:unless="${message.getSupport_id} eq 0" th:onclick="window.location.href = '/support/complete/[[${message.getId}]]';" type="button">Завершить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <p th:case="users">
         <p th:if="${users}">
             <button  type="button" data-bs-toggle="modal" data-bs-target="#formNew">New User</button>
 
-
-        <table th:if="${users}" class="table table-striped table-hover">
-            <thead class="table-dark">
-            <tr>
-                <th scope="col">User Id</th>
-                <th scope="col">Имя</th>
-                <th scope="col">Фамилия</th>
-                <th scope="col">Логин</th>
-                <th scope="col">Actions</th>
-            </tr>
-            </thead>
-            <tbody th:each="message : ${users}">
-                <tr>
-                    <td th:text="${message.getId}"></td>
-                    <td th:text="${message.getFirst_name}"></td>
-                    <td th:text="${message.getLast_name}"></td>
-                    <td th:text="${message.getUsername}"></td>
-                    <td>
-                        <button th:method="delete" sec:authorize="hasRole('ADMIN')" th:onclick="window.location.href = '/admin/delete/user/[[${message.getId}]]';" type="button">Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-
+            <div th:if="${users}" >
+                <div th:each="message : ${users}">
+                    <div class="card">
+                        <div class="card-body m-2">
+                            <h4 class="card-header" th:text="${message.getFirst_name + ' ' + message.getLast_name}">a</h4>
+                            <a class="button" data-bs-toggle="collapse" th:href="'#content' + ${message.getId}" role="button" aria-expanded="false" aria-controls="content">Детали</a>
+                            <div class="card-text collapse" th:id="'content' + ${message.getId}">
+                                <label for="idUser">Номер</label>
+                                <p id="idUser" th:text="${message.getId}">a</p>
+                                <label for="username">Логин</label>
+                                <p id="username" th:text="${message.getUsername}">a</p>
+                                <button th:method="delete" sec:authorize="hasRole('ADMIN')" th:onclick="window.location.href = '/admin/delete/user/[[${message.getId}]]';" type="button">Удалить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 <!--ggh-->
     <p th:case="types">
 
         <p th:if="${types}">
             <button data-bs-toggle="modal" data-bs-target="#formNew" type="button">New Type</button>
 
-        <table th:if="${types}" class="table table-striped table-hover">
-            <thead class="table-dark">
-            <tr>
-                <th scope="col">Type Id</th>
-                <th scope="col">Description</th>
-                <th scope="col">Actions</th>
-            </tr>
-            </thead>
-            <tbody th:each="message : ${types}">
-                <tr>
-                    <td th:text="${message.getId}"></td>
-                    <td th:text="${message.getDescription}"></td>
-                    <td>
-                        <button th:onclick="window.location.href = '/admin/delete/type/[[${message.getId}]]';" type="button">Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
+            <div th:if="${types}" >
+                <div th:each="message : ${types}">
+                    <div class="card">
+                        <div class="card-body m-2">
+                            <label for="idType">ID</label>
+                            <span id="idType" th:text="${message.getId}"></span>
+                            <label for="descriptionType">Описание</label>
+                            <span id="descriptionType" th:text="${message.getDescription}"></span>
+                            <button th:onclick="window.location.href = '/admin/delete/type/[[${message.getId}]]';" type="button">Удалить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
     <p th:case="priorities">
 
         <p th:if="${priorities}">
             <button data-bs-toggle="modal" data-bs-target="#formNew" type="button">New Priority</button>
 
-        <table th:if="${priorities}" class="table table-striped table-hover">
-            <thead class="table-dark">
-            <tr>
-                <th scope="col">Priority Id</th>
-                <th scope="col">Description</th>
-                <th scope="col">Actions</th>
-            </tr>
-            </thead>
-            <tbody th:each="message : ${priorities}">
-            <tr>
-                <td th:text="${message.getId}"></td>
-                <td th:text="${message.getDescription}"></td>
-                <td>
-                    <button th:method="delete" th:onclick="window.location.href = '/admin/delete/priority/[[${message.getId}]]';" type="button">Delete</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
-
+            <div th:if="${priorities}" >
+                <div th:each="message : ${priorities}">
+                    <div class="card">
+                        <div class="card-body m-2">
+                            <label for="idPriority">ID</label>
+                            <span id="idPriority" th:text="${message.getId}"></span>
+                            <label for="descriptionPriority">Описание</label>
+                            <span id="descriptionPriority" th:text="${message.getDescription}"></span>
+                            <button th:method="delete" th:onclick="window.location.href = '/admin/delete/priority/[[${message.getId}]]';" type="button">Удалить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
     <p th:case="roles">
-
         <table th:if="${roles}" class="table table-striped table-hover">
             <thead class="table-dark">
             <tr>
-                <th scope="col">Priority Id</th>
+                <th scope="col">Id</th>
                 <th scope="col">Description</th>
             </tr>
             </thead>
@@ -148,11 +120,6 @@
             </tr>
             </tbody>
         </table>
-
-
-
-
-
 </div>
 
 <div class="modal fade" id="formNew" tabindex="-1" aria-labelledby="label" aria-hidden="true">

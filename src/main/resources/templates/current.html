@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html
-        xmlns:th="http://www.w3.org/1999/xhtml"
->
+<html xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="application/json; charset=UTF-8" />
 
@@ -13,12 +11,12 @@
       integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
       crossorigin="anonymous"
     />
-    <!-- <link rel="stylesheet" href="../static/style/style.css" /> -->
+    <link rel="stylesheet" href="../static/style/style.css" />
   </head>
   <body>
-  <header>
-    <div th:insert="navBar::navbar"></div>
-  </header>
+    <header>
+      <div th:insert="navBar::navbar"></div>
+    </header>
 
     <main class="main">
       <div class="left-block">
@@ -27,8 +25,19 @@
           <div class="card">
             <div class="card-body m-2">
               <h4 class="card-header" th:text="${message.getDescription}">a</h4>
-              <a class="button" data-bs-toggle="collapse" th:href="'#content' + ${message.getId}" role="button" aria-expanded="false" aria-controls="content">Детали</a>
-              <div class="card-text collapse" th:id="'content' + ${message.getId}">
+              <a
+                class="button"
+                data-bs-toggle="collapse"
+                th:href="'#content' + ${message.getId}"
+                role="button"
+                aria-expanded="false"
+                aria-controls="content"
+                >Детали</a
+              >
+              <div
+                class="card-text collapse"
+                th:id="'content' + ${message.getId}"
+              >
                 <label for="id">Номер заявки</label>
                 <p id="id" th:text="${message.getId}">a</p>
                 <label for="status">Статус заявки</label>
@@ -36,7 +45,12 @@
                 <label for="type">Тип неполадки</label>
                 <p id="type" th:text="${message.getType.getDescription}">a</p>
                 <label for="priority">Приоритет</label>
-                <p id="priority" th:text="${message.getPriority.getDescription}">a</p>
+                <p
+                  id="priority"
+                  th:text="${message.getPriority.getDescription}"
+                >
+                  a
+                </p>
               </div>
             </div>
           </div>

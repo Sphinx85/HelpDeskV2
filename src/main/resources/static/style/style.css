@@ -12,7 +12,7 @@
 :focus,:active{outline: none;}
 a:focus,a:active{outline: none;}
 
-nav,footer,header,aside{display: block;}
+nav,footer,header,aside, ul{display: block;}
 
 html,body{
 	height: 100%;
@@ -51,6 +51,60 @@ body {
 	background-position: center center;
 	background-repeat: no-repeat;
 }
+
+.header {
+	margin: 20px 20px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+
+	background-color: #71B0B4;
+	color:black;
+	border-radius: 20px;
+
+}
+
+.left-navbar-lex,.right-navbar-lex {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+
+
+}
+.left-navbar-lex {
+	padding-left: 2rem;
+}
+
+.right-navbar-lex {
+	padding-right: 2rem;
+}
+
+.navbar-lex-item {
+	padding: 0 2rem;
+	padding-right: 5px;
+	border-radius: 3px;
+	color: #313131;
+	border-color: black;
+}
+
+li a{
+		text-decoration: none;
+		font-family: sans-serif;
+		/* color: #5757a0; */
+		color: black;
+		display: inline-block;
+		padding: 10px 20px;
+		/* background-color: lavender; */
+		background-color: white;
+		/* border-bottom: 5px solid #5757a0; */
+		border-top: 5px solid #71B0B4;
+		border-bottom: 5px solid black;
+		border-radius: 20px;
+
+}
+
 
 .header-text {
 	font-weight: 700;

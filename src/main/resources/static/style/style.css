@@ -61,7 +61,7 @@ body {
 
 	background-color: #71B0B4;
 	color:black;
-	border-radius: 20px;
+	border-radius: 10px;
 
 }
 
@@ -231,8 +231,51 @@ button:active {
 
 .left-block-down {
 	flex-grow: 1;
+	margin-top: 10px;
+	
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
+.card {
+	margin-bottom: 15px;
+   border:2px solid black;
+   	border-radius: 15px;
+
+		 display: flex;
+		 flex-direction: column;
+		 justify-content: space-between;
+		 padding: 10px;
+}
+
+.card-header {
+	display: block;
+	background-color: #777674;
+	margin: 5px 10px;
+	padding-left: 10px;
+	border-radius: 5px;
+}
+
+.card-button {
+	width: 90px;
+	border: 1px solid black; /* Рамка */
+	border-radius: 10px;
+	display: block;
+	/* float:right; */
+	margin: 5px;
+	margin-left: auto;
+	padding: 5px 10px; /* Поля */
+	text-decoration: none; /* Убираем подчёркивание */
+	color: #000; /* Цвет текста */
+}
+
+.card-button:hover {
+	box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Тень */
+	background: linear-gradient(to bottom, #fcfff4, #e9e9ce); /* Градиент */
+	
+ }
 
 .right_block {
 	display: flex;
@@ -261,4 +304,7 @@ button:active {
 	border-radius: 20px;
 	width: 250px;
 	height: 100px;
+
+	padding: 5px;
+	resize: none;
 }

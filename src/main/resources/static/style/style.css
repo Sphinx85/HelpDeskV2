@@ -258,7 +258,7 @@ button:active {
 	border-radius: 5px;
 }
 
-.lex-card-button {
+.lex_card_button {
 	width: 90px;
 	border: 1px solid black; /* Рамка */
 	border-radius: 10px;
@@ -271,12 +271,16 @@ button:active {
 	color: #000; /* Цвет текста */
 }
 
-.card-button:hover {
+.lex_card_button:hover {
 	box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Тень */
 	background: linear-gradient(to bottom, #fcfff4, #e9e9ce); /* Градиент */
 	
  }
 
+
+ /* .lex_card_text {
+	 display: block;
+ } */
 .right_block {
 	display: flex;
 	flex-direction: column;

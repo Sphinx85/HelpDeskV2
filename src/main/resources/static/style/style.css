@@ -239,7 +239,7 @@ button:active {
 	justify-content: space-between;
 }
 
-.card {
+.lex-card {
 	margin-bottom: 15px;
    border:2px solid black;
    	border-radius: 15px;
@@ -250,7 +250,7 @@ button:active {
 		 padding: 10px;
 }
 
-.card-header {
+.lex-card-header {
 	display: block;
 	background-color: #777674;
 	margin: 5px 10px;
@@ -258,7 +258,7 @@ button:active {
 	border-radius: 5px;
 }
 
-.card-button {
+.lex-card-button {
 	width: 90px;
 	border: 1px solid black; /* Рамка */
 	border-radius: 10px;

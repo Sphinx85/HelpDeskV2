@@ -42,6 +42,9 @@ public class WorkPlaceController {
     @Autowired
     private ModelService modelService;
 
+    @Autowired
+    private Classifier classifier;
+
     /**
      * Метод отображения главной страницы приложения
      * @param principal Входной параметр принимает текущего пользователя
@@ -60,6 +63,7 @@ public class WorkPlaceController {
 
     /**
      * Метод отображения деталей заявки. Карточка заявки.
+     * Не используется с версии 0.4.2
      * @param id Входной параметро принимает на вход из строки id заявки
      * @param model Входной параметр вкладывает в модель текущую заявку
      * @return Возвращает страницу
@@ -84,8 +88,8 @@ public class WorkPlaceController {
         Message message = new Message();
         message.setDescription(description);
         message.setUser(userService.findByUsername(principal.getName()));
-        message.setType(typeService.findById(1).get());
-        message.setPriority(priorityService.findById(1).get());
+        message.setType(typeService.findById(classifier.getTypeId(description)).get());
+        message.setPriority(priorityService.findById(classifier.getPriorityId(description)).get());
         message.setSupport_id(0);
         message.setStatus(statusBuilder.construct(message));
         message.setActual(true);

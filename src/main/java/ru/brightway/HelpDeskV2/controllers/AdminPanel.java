@@ -49,6 +49,9 @@ public class AdminPanel {
     @Autowired
     private ModelService modelService;
 
+    @Autowired
+    private Classifier classifier;
+
     /**
      * Метод отображения панели администратора.
      * @return Возвращает страницу adminPanel.html
@@ -181,10 +184,12 @@ public class AdminPanel {
      */
     @PostMapping("/newType")
     public String newType(@ModelAttribute(name = "id") int id,
-                          @ModelAttribute(name = "description") String description){
+                          @ModelAttribute(name = "description") String description,
+                          @ModelAttribute(name = "alert") Integer alert){
         Type type = new Type();
         type.setId(id);
         type.setDescription(description);
+        classifier.addKeyWords(description, alert, id);
         typeService.saveType(type);
         return "redirect:/admin/allTypes";
     }

@@ -2,8 +2,6 @@ package ru.brightway.HelpDeskV2.Entites;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import ru.brightway.HelpDeskV2.services.interfaces.UserService;
 
 import javax.persistence.*;
 

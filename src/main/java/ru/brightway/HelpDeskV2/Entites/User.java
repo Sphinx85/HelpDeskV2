@@ -16,7 +16,9 @@ import java.util.Set;
 
 @SuppressWarnings("com.haulmont.jpb.LombokDataInspection")
 @Entity
-@Table(name = "\"users\"")
+@Table(name = "\"users\"", uniqueConstraints = {
+        @UniqueConstraint(name = "uc_user_username", columnNames = {"username"})
+})
 @Data
 @NoArgsConstructor
 public class User implements UserDetails {

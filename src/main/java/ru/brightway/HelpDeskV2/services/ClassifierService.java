@@ -36,20 +36,34 @@ public class ClassifierService implements Classifier {
                         if (hashIds.get(keyWords.getTypeId()) != null){
                             idIndex.add(keyWords.getTypeId());
                             hashIds.computeIfPresent(keyWords.getTypeId(), (k, v) -> v + 1);
-                        } else hashIds.put(keyWords.getTypeId(),1);
+                        } else {
+                            hashIds.put(keyWords.getTypeId(),1);
+                            idIndex.add(keyWords.getTypeId());
+                        }
                     }
                 }
             }
         }
 
         int targetId = 0;
+        int marker = 0;
         Collection<Integer> values = hashIds.values();
         if (!hashIds.isEmpty())
-            for (int value: values)
-                if (value>targetId) targetId = value;
+
+            for (int value: values) {
+                if (marker == value) {
+                    return 0;
+                }
+                if (value > targetId) {
+                    targetId = value;
+                    marker = value;
+                }
+            }
+
+
 
         for (int id: idIndex){
-            if (hashIds.get(id).equals(targetId)) return id; //получаю количество заявок, а не айди.
+            if (hashIds.get(id).equals(targetId)) return id;
         }
 
         return 0;

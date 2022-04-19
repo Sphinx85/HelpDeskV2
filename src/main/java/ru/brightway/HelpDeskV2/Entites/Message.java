@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Сущность заявки. Имеет поля:
@@ -32,6 +33,8 @@ public class Message {
     private Boolean actual;
 
     private String status;
+
+    private Date date;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")

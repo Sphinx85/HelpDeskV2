@@ -11,6 +11,7 @@ import ru.brightway.HelpDeskV2.Entites.User;
 import ru.brightway.HelpDeskV2.services.interfaces.*;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -99,7 +100,26 @@ public class WorkPlaceController {
         message.setSupport_id(0);
         message.setStatus(statusBuilder.construct(message));
         message.setActual(true);
+        message.setDate(new Date());
+        if (spam(message, principal)){
+            return "redirect:/workplace/messages/current";
+        }
         messageService.saveMessage(message);
         return "redirect:/workplace/messages/current";
+    }
+
+    private boolean spam(Message message, Principal principal) {
+        User user = userService.findByUsername(principal.getName());
+        List<Message> controlMessages = user.getMessages();
+        for (Message control: controlMessages){
+            if (control.getActual()
+            && message.getDescription().equals(control.getDescription())
+            &&(message.getDate().getTime()-control.getDate().getTime()<900000))
+                return true;
+            if (control.getActual()
+                    &&(message.getDate().getTime()-control.getDate().getTime()<180000))
+                return true;
+        }
+        return false;
     }
 }

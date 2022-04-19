@@ -6,10 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.brightway.HelpDeskV2.Entites.Priority;
-import ru.brightway.HelpDeskV2.Entites.Role;
-import ru.brightway.HelpDeskV2.Entites.Type;
-import ru.brightway.HelpDeskV2.Entites.User;
+import ru.brightway.HelpDeskV2.Entites.*;
 import ru.brightway.HelpDeskV2.services.interfaces.*;
 
 import java.security.Principal;
@@ -51,6 +48,9 @@ public class AdminPanel {
 
     @Autowired
     private Classifier classifier;
+
+    @Autowired
+    private QuickService quickService;
 
     /**
      * Метод отображения панели администратора.
@@ -120,6 +120,13 @@ public class AdminPanel {
     @GetMapping("/allRoles")
     public String allRoles(Principal principal, Model model){
         model.addAttribute("roles", accessService.findAll());
+        modelService.inject(principal,model);
+        return "allLists";
+    }
+
+    @GetMapping("/allQuick")
+    public String allQuick(Principal principal, Model model){
+        model.addAttribute("quickMessages", quickService.findAll());
         modelService.inject(principal,model);
         return "allLists";
     }
@@ -227,6 +234,14 @@ public class AdminPanel {
         role.setRole(description);
         accessService.saveAccess(role);
         return "redirect:/admin/allRoles";
+    }
+
+    @PostMapping("/newQuick")
+    public String newQuick(@ModelAttribute(name = "description") String description){
+        QuickMessages quick = new QuickMessages();
+        quick.setDescription(description);
+        quickService.saveQuickMessages(quick);
+        return "redirect:/admin/allQuick";
     }
 
     /**

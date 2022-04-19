@@ -55,5 +55,16 @@
             </form>
         </div>
 
+        <div th:fragment="quickForm">
+            <form method="POST" th:action="@{/admin/newQuick}"  action="#">
+
+                <th:p>description</th:p>
+                <input type="text" name="description" >
+
+                <br>
+                <input type="submit" class="button" value="Отправить" />
+            </form>
+        </div>
+
     </body>
 </html>

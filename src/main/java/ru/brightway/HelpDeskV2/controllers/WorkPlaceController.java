@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.brightway.HelpDeskV2.Entites.Message;
+import ru.brightway.HelpDeskV2.Entites.QuickMessages;
 import ru.brightway.HelpDeskV2.Entites.User;
 import ru.brightway.HelpDeskV2.services.interfaces.*;
 
@@ -45,6 +46,9 @@ public class WorkPlaceController {
     @Autowired
     private Classifier classifier;
 
+    @Autowired
+    private QuickService quickService;
+
     /**
      * Метод отображения главной страницы приложения
      * @param principal Входной параметр принимает текущего пользователя
@@ -57,7 +61,9 @@ public class WorkPlaceController {
         List<Message> messages = user.getMessages();
         messages.removeIf(message -> !message.getActual());
         user.setMessages(messages);
+        List<QuickMessages> quickMessages = quickService.findAll();
         model.addAttribute(user);
+        model.addAttribute("quickMessages", quickMessages);
         return "current" ;
     }
 

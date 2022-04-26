@@ -14,7 +14,7 @@
 
 	<groupId>ru.brightway</groupId>
 	<artifactId>HelpDeskV2</artifactId>
-	<version>0.4.2</version>
+	<version>0.5.0</version>
 	<name>HelpDeskV2</name>
 	<description>Help Desk System</description>
 	<properties>

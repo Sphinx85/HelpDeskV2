@@ -37,6 +37,10 @@
                 <p id="type" th:text="${message.getType.getDescription}">a</p>
                 <label for="priority">Приоритет</label>
                 <p id="priority" th:text="${message.getPriority.getDescription}">a</p>
+                <div align="right" th:each="comment : ${message.getComments}">
+                  <div th:text = "${comment.getDate} + ' ' + ${comment.getDescription}">a</div>
+                </div>
+
               </div>
             </div>
           </div>

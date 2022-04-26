@@ -38,6 +38,18 @@
                             </p>
                             <button th:if="${message.getActual}" sec:authorize="hasRole('ADMIN')" th:onclick="window.location.href = '/admin/delete/message/[[${message.getId}]]';" type="button">Удалить</button>
                             <button sec:authorize="hasRole('SUPPORT')" th:if="${message.getSupport_id} eq 0" th:onclick="window.location.href = '/support/apply/[[${message.getId}]]';" type="button">Взять в работу</button>
+                            <div align="right" th:each="comment : ${message.getComments}">
+                                <div th:text = "${comment.getDate} + ' ' + ${comment.getDescription}">a</div>
+                            </div>
+                            <div align="right">
+                                <form sec:authorize="hasRole('SUPPORT')" method="POST" th:action="@{/support/comment}" action="#">
+                                    <input type="text" name="description">
+                                    <br>
+                                    <br>
+                                    <input type="hidden" name="messageId" th:value="${message.getId}">
+                                    <input type="submit" class="button" value="Отправить" />
+                                </form>
+                            </div>
                             <button sec:authorize="hasRole('SUPPORT')" th:unless="${message.getSupport_id} eq 0" th:onclick="window.location.href = '/support/complete/[[${message.getId}]]';" type="button">Завершить</button>
                         </div>
                     </div>

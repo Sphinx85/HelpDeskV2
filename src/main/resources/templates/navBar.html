@@ -24,6 +24,15 @@
             <li class="navbar-lex-item" sec:authorize="hasRole('SUPPORT')">
                 <a class="nav-lex-link" href="/support/panel">Панель Поддержки</a>
             </li>
+            <li class="nav-lex-item" sec:authorize="hasRole('SUPPORT')">
+                <a class="nav-lex-link" href="/support/report">Отчет</a>
+            </li>
+            <li class="nav-lex-item" sec:authorize="hasRole('ADMIN')">
+                <a class="nav-lex-link" href="/admin/report">Отчет</a>
+            </li>
+            <li class="nav-lex-item" sec:authorize="hasRole('USER')">
+                <a class="nav-lex-link" href="/user/report">Отчет</a>
+            </li>
         </ul>
         <div class="center-navbar-lex">
             <a class="navbar-logo" href="/">

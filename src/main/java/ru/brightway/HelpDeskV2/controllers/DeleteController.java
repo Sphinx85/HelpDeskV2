@@ -39,6 +39,9 @@ public class DeleteController {
     @Autowired
     private TypeService typeService;
 
+    @Autowired
+    private QuickService quickService;
+
     /**
      * Метод удаления пользователя по id
      * @param id Параметр из строки запроса ищет пользователя по id
@@ -62,6 +65,12 @@ public class DeleteController {
     public String deleteRole(@PathVariable(name = "id") Integer id){
         accessService.deleteAccess(id);
         return "redirect:/admin/allRoles";
+    }
+
+    @GetMapping("/quick/{id}")
+    public String deleteQuick(@PathVariable(name = "id") Integer id){
+        quickService.deleteMessage(id);
+        return "redirect:/admin/allQuick";
     }
 
     /**

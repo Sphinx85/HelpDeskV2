@@ -37,6 +37,10 @@
                 <p id="type" th:text="${message.getType.getDescription}">a</p>
                 <label for="priority">Приоритет</label>
                 <p id="priority" th:text="${message.getPriority.getDescription}">a</p>
+                <div align="right" th:each="comment : ${message.getComments}">
+                  <div th:text = "${comment.getDate} + ' ' + ${comment.getDescription}">a</div>
+                </div>
+
               </div>
             </div>
           </div>
@@ -47,43 +51,26 @@
         <div class="right-block-up">
           <h3 class="header-text">Быстрые заявки</h3>
 
-          <form
-            class="right-block-up-button"
-            method="POST"
-            th:action="@{/workplace/message/save}"
-          >
-            <input
-              class="button"
-              type="hidden"
-              name="description"
-              value="Заменить картридж"
-            />
+          <div th:each="message : ${quickMessages}">
+            <form
+                  class="right-block-up-button"
+                  method="POST"
+                  th:action="@{/workplace/message/save}">
+              <input
+                      class="button"
+                      type="hidden"
+                      name="description"
+                      th:value="${message.getDescription}"
+              />
 
-            <input
-              class="button interior-block"
-              type="submit"
-              value="Заменить картридж"
-            />
-          </form>
+              <input
+                      class="button interior-block"
+                      type="submit"
+                      th:value="${message.getDescription}"
+              />
+            </form>
+          </div>
 
-          <form
-            class="right-block-up-button"
-            method="POST"
-            th:action="@{/workplace/message/save}"
-          >
-            <input
-              class="button"
-              type="hidden"
-              name="description"
-              value="Обновить программу"
-            />
-
-            <input
-              class="button interior-block"
-              type="submit"
-              value="Обновить программу"
-            />
-          </form>
         </div>
         <div class="right-block-down">
           <div class="section_forms_forms">

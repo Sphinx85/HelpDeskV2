@@ -6,10 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.brightway.HelpDeskV2.Entites.Priority;
-import ru.brightway.HelpDeskV2.Entites.Role;
-import ru.brightway.HelpDeskV2.Entites.Type;
-import ru.brightway.HelpDeskV2.Entites.User;
+import ru.brightway.HelpDeskV2.Entites.*;
 import ru.brightway.HelpDeskV2.services.interfaces.*;
 
 import java.security.Principal;
@@ -48,6 +45,12 @@ public class AdminPanel {
 
     @Autowired
     private ModelService modelService;
+
+    @Autowired
+    private Classifier classifier;
+
+    @Autowired
+    private QuickService quickService;
 
     /**
      * Метод отображения панели администратора.
@@ -121,6 +124,13 @@ public class AdminPanel {
         return "allLists";
     }
 
+    @GetMapping("/allQuick")
+    public String allQuick(Principal principal, Model model){
+        model.addAttribute("quickMessages", quickService.findAll());
+        modelService.inject(principal,model);
+        return "allLists";
+    }
+
     /**
      * Метод создает модель того типа, которому необходимо заполнить форму.
      * @param typeModel В адресной строке передается параметр типа модели
@@ -181,10 +191,12 @@ public class AdminPanel {
      */
     @PostMapping("/newType")
     public String newType(@ModelAttribute(name = "id") int id,
-                          @ModelAttribute(name = "description") String description){
+                          @ModelAttribute(name = "description") String description,
+                          @ModelAttribute(name = "alert") Integer alert){
         Type type = new Type();
         type.setId(id);
         type.setDescription(description);
+        classifier.addKeyWords(description, alert, id);
         typeService.saveType(type);
         return "redirect:/admin/allTypes";
     }
@@ -222,6 +234,14 @@ public class AdminPanel {
         role.setRole(description);
         accessService.saveAccess(role);
         return "redirect:/admin/allRoles";
+    }
+
+    @PostMapping("/newQuick")
+    public String newQuick(@ModelAttribute(name = "description") String description){
+        QuickMessages quick = new QuickMessages();
+        quick.setDescription(description);
+        quickService.saveQuickMessages(quick);
+        return "redirect:/admin/allQuick";
     }
 
     /**

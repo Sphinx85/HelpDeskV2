@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.brightway.HelpDeskV2.Entites.Comments;
 import ru.brightway.HelpDeskV2.Entites.Message;
-import ru.brightway.HelpDeskV2.services.interfaces.MessageService;
-import ru.brightway.HelpDeskV2.services.interfaces.ModelService;
-import ru.brightway.HelpDeskV2.services.interfaces.StatusBuilder;
-import ru.brightway.HelpDeskV2.services.interfaces.UserService;
+import ru.brightway.HelpDeskV2.services.interfaces.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,6 +36,9 @@ public class SupportPanel {
 
     @Autowired
     private ModelService modelService;
+
+    @Autowired
+    private CommentsService commentsService;
 
     /**
      * Метод входа в панель специалиста поддержки
@@ -106,5 +109,21 @@ public class SupportPanel {
         message.setActual(false);
         messageService.update(message);
         return "redirect:/support/current";
+    }
+
+    @PostMapping("/comment")
+    public String saveComment(@ModelAttribute(name = "description") String description,
+                              @ModelAttribute(name = "messageId") Integer messageId){
+        Message message = messageService.findById(messageId).get();
+        Date date = new Date();
+        Comments comment = new Comments();
+
+
+        comment.setDate(date);
+        comment.setDescription(description);
+        comment.setMessage(message);
+        commentsService.save(comment);
+        return "redirect:/workplace/messages/current";
+
     }
 }

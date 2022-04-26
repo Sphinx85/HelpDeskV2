@@ -1,6 +1,7 @@
 package ru.brightway.HelpDeskV2.services;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.brightway.HelpDeskV2.Entites.Priority;
@@ -19,6 +20,8 @@ import java.util.Optional;
 public class DefaultPriorityService implements PriorityService {
     @Autowired
     private final PriorityRepository priorityRepository;
+    @Getter
+    public final int DEFAULT_ID = 1;
 
     /**
      * Метод сохранения группы приоритетов

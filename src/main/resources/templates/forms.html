@@ -34,7 +34,9 @@
                 <input type="text" name="id" >
                 <br>
                 <th:p>description</th:p>
-                <input type="text" name="description" >
+                <input type="text" name="description" ><br>
+                <input type="hidden" name="alert" value="1">
+                <input type="checkbox" name="alert" value="0">
 
                 <br>
                 <input type="submit" class="button" value="Отправить" />
@@ -45,6 +47,17 @@
                 <th:p>ID</th:p>
                 <input type="text" name="id" >
                 <br>
+                <th:p>description</th:p>
+                <input type="text" name="description" >
+
+                <br>
+                <input type="submit" class="button" value="Отправить" />
+            </form>
+        </div>
+
+        <div th:fragment="quickForm">
+            <form method="POST" th:action="@{/admin/newQuick}"  action="#">
+
                 <th:p>description</th:p>
                 <input type="text" name="description" >
 

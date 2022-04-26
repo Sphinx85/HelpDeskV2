@@ -2,10 +2,10 @@ package ru.brightway.HelpDeskV2.Entites;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import ru.brightway.HelpDeskV2.services.interfaces.UserService;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Сущность заявки. Имеет поля:
@@ -35,15 +35,20 @@ public class Message {
 
     private String status;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    private Date date;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id")
     private Type type;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "priority_id")
     private Priority priority;
+
+    @OneToMany(mappedBy = "message")
+    private List<Comments> comments;
 }

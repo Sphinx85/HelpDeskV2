@@ -23,11 +23,11 @@
       <div class="left-block">
         <h1 class="h1 header-text">Мои заявки</h1>
         <div class="left-block-down" th:each="message : ${user.messages}">
-          <div class="card">
-            <div class="card-body m-2">
-              <h4 class="card-header" th:text="${message.getDescription}">a</h4>
-              <a class="button" data-bs-toggle="collapse" th:href="'#content' + ${message.getId}" role="button" aria-expanded="false" aria-controls="content">Детали</a>
-              <div class="card-text collapse" th:id="'content' + ${message.getId}">
+          <div class="lex-card">
+            <div class="card-body m-2"> <!--этого блока нет-->
+              <h4 class="lex-card-header" th:text="${message.getDescription}">a</h4>
+              <a class="lex_card_button" data-bs-toggle="collapse" th:href="'#content' + ${message.getId}" role="button" aria-expanded="false" aria-controls="content">Детали</a>
+              <div class="lex_card_text collapse" th:id="'content' + ${message.getId}">
                 <label for="id">Номер заявки</label>
                 <p id="id" th:text="${message.getId}">a</p>
                 <label for="status">Статус заявки</label>

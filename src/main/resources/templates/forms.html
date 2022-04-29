@@ -7,21 +7,25 @@
 </head>
     <body>
         <div th:fragment="userForm">
-            <form method="POST" th:action="@{/admin/newUser}"  action="#">
+            <form method="POST" th:action="@{/admin/newUser}"  action="#" class="col-md-4">
                 <th:p>Имя</th:p>
-                <input type="text" class="section_forms_input" name="first_name" >
+                <input type="text" class="form-control" name="first_name" required>
                 <br>
                 <th:p>Фамилия</th:p>
-                <input type="text" class="section_forms_input" name="last_name" >
+                <input type="text" class="form-control" name="last_name" required>
                 <br>
                 <th:p>Логин</th:p>
-                <input type="text" class="section_forms_input" name="username" >
+                <input type="text" class="form-control" name="username" required>
                 <br>
                 <th:p>Пароль</th:p>
-                <input type="text" class="section_forms_input" name="password" >
+                <input type="text" class="form-control" name="password" required>
                 <br>
                 <th:p>Роль</th:p>
-                <input type="text" class="section_forms_input" name="role" >
+                <select class="form-select" name="role" required>
+                    <option selected value="3">Пользователь</option>
+                    <option value="1">Администратор</option>
+                    <option value="2">Специалист поддержки</option>
+                </select>
                 <br>
 
                 <br>

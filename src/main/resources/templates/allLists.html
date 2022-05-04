@@ -103,7 +103,7 @@
             <p th:case="priorities">
 
                 <p th:if="${priorities}">
-                    <button data-bs-toggle="modal" data-bs-target="#formNew" type="button">New Priority</button>
+<!--                    <button data-bs-toggle="modal" data-bs-target="#formNew" type="button">New Priority</button>-->
 
                     <div th:if="${priorities}" >
                         <div th:each="message : ${priorities}">
@@ -113,7 +113,7 @@
                                     <span id="idPriority" th:text="${message.getId}"></span>
                                     <label for="descriptionPriority">Описание</label>
                                     <span id="descriptionPriority" th:text="${message.getDescription}"></span>
-                                    <button th:method="delete" th:onclick="window.location.href = '/admin/delete/priority/[[${message.getId}]]';" type="button">Удалить</button>
+<!--                                    <button th:method="delete" th:onclick="window.location.href = '/admin/delete/priority/[[${message.getId}]]';" type="button">Удалить</button>-->
                                 </div>
                             </div>
                         </div>

@@ -33,26 +33,29 @@
             </form>
         </div>
         <div th:fragment="typeForm">
-            <form method="POST" th:action="@{/admin/newType}"  action="#">
+            <form method="POST" th:action="@{/admin/newType}"  action="#" class="col-md-4">
                 <th:p>ID</th:p>
-                <input type="text" name="id" >
+                <input type="text" name="id" class="form-control" required>
                 <br>
                 <th:p>description</th:p>
-                <input type="text" name="description" ><br>
-                <input type="hidden" name="alert" value="1">
-                <input type="checkbox" name="alert" value="0">
+                <input type="text" name="description" class="form-control" required ><br>
+
+                <select class="form-select" name="alert" required>
+                    <option selected value="1">Обычная</option>
+                    <option value="0">Срочная</option>
+                </select>
 
                 <br>
                 <input type="submit" class="button" value="Отправить" />
             </form>
         </div>
         <div th:fragment="priorityForm">
-            <form method="POST" th:action="@{/admin/newPriority}"  action="#">
+            <form method="POST" th:action="@{/admin/newPriority}"  action="#" class="col-md-4">
                 <th:p>ID</th:p>
-                <input type="text" name="id" >
+                <input type="text" name="id" class="form-control" required>
                 <br>
                 <th:p>description</th:p>
-                <input type="text" name="description" >
+                <input type="text" name="description" class="form-control" required>
 
                 <br>
                 <input type="submit" class="button" value="Отправить" />
@@ -60,10 +63,10 @@
         </div>
 
         <div th:fragment="quickForm">
-            <form method="POST" th:action="@{/admin/newQuick}"  action="#">
+            <form method="POST" th:action="@{/admin/newQuick}"  action="#" class="col-md-4">
 
                 <th:p>description</th:p>
-                <input type="text" name="description" >
+                <input type="text" name="description" class="form-control" required>
 
                 <br>
                 <input type="submit" class="button" value="Отправить" />

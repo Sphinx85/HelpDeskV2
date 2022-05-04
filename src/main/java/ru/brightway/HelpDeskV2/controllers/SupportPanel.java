@@ -10,7 +10,6 @@ import ru.brightway.HelpDeskV2.Entites.Message;
 import ru.brightway.HelpDeskV2.services.interfaces.*;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -117,6 +116,25 @@ public class SupportPanel {
         Message message = messageService.findById(messageId).get();
         Date date = new Date();
         Comments comment = new Comments();
+        if(description.contains("http")){
+            String[] temporaryContainer = description.split("\\s");
+            for (int i = 0; i < temporaryContainer.length; i++) {
+                if (temporaryContainer[i].contains("http")){
+                    String[] linkBuilder = temporaryContainer[i].split("/");
+                    temporaryContainer[i] = "<a href=\"" +
+                            temporaryContainer[i] +
+                            "\">" +
+                            linkBuilder[2] +
+                            "</a>";
+                }
+            }
+
+            StringBuilder newDescription = new StringBuilder();
+            for (String component : temporaryContainer){
+                newDescription.append(component).append(" ");
+            }
+            description = newDescription.toString();
+        }
 
 
         comment.setDate(date);

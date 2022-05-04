@@ -92,6 +92,7 @@ public class WorkPlaceController {
      */
     @PostMapping("/message/save")
     public String quickMessage(@ModelAttribute(name = "description") String description, Principal principal){
+        if (description.length() < 7) return "redirect:/workplace/messages/current";
         Message message = new Message();
         message.setDescription(description);
         message.setUser(userService.findByUsername(principal.getName()));

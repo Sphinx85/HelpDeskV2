@@ -9,34 +9,36 @@
   </header>
 
     <main class="main">
-      <div class="left-block">
+      <div class="scrollBlock">
         <h1 class="h1 header-text">Мои заявки</h1>
-        <div class="left-block-down" th:each="message : ${user.messages}">
-          <div class="lex-card">
-            <div class="card-body m-2"> <!--этого блока нет-->
-              <h4 class="lex-card-header" th:text="${message.getDescription}">a</h4>
-              <a class="lex_card_button" data-bs-toggle="collapse" th:href="'#content' + ${message.getId}" role="button" aria-expanded="false" aria-controls="content">Детали</a>
-              <div class="lex_card_text collapse" th:id="'content' + ${message.getId}">
-                <label for="id">Номер заявки</label>
-                <p id="id" th:text="${message.getId}">a</p>
-                <label for="status">Статус заявки</label>
-                <p id="status" th:text="${message.getStatus}">a</p>
-                <label for="type">Тип неполадки</label>
-                <p id="type" th:text="${message.getType.getDescription}">a</p>
-                <label for="priority">Приоритет</label>
-                <p id="priority" th:text="${message.getPriority.getDescription}">a</p>
-                <div align="right" th:each="comment : ${message.getComments}">
-                  <div th:text = "${comment.getDate} + ' ' + ${comment.getDescription}">a</div>
-                </div>
 
+          <div class="left-block-down" th:each="message : ${user.messages}">
+            <div class="lex-card">
+              <div class="card-body m-2"> <!--этого блока нет-->
+                <h4 class="lex-card-header" th:text="${message.getDescription}">a</h4>
+                <a class="lex_card_button" data-bs-toggle="collapse" th:href="'#content' + ${message.getId}" role="button" aria-expanded="false" aria-controls="content">Детали</a>
+                <div class="lex_card_text collapse" th:id="'content' + ${message.getId}">
+                  <label for="id">Номер заявки</label>
+                  <p id="id" th:text="${message.getId}">a</p>
+                  <label for="status">Статус заявки</label>
+                  <p id="status" th:text="${message.getStatus}">a</p>
+                  <label for="type">Тип неполадки</label>
+                  <p id="type" th:text="${message.getType.getDescription}">a</p>
+                  <label for="priority">Приоритет</label>
+                  <p id="priority" th:text="${message.getPriority.getDescription}">a</p>
+                  <div align="right" th:each="comment : ${message.getComments}">
+                    <div th:text = "${comment.getDate} + ' ' + ${comment.getDescription}">a</div>
+                  </div>
+
+                </div>
               </div>
             </div>
           </div>
-        </div>
+
       </div>
 
       <div class="right_block">
-        <div class="right-block-up">
+        <div class="rightScroll">
           <h3 class="header-text">Быстрые заявки</h3>
 
           <div th:each="message : ${quickMessages}">
@@ -52,7 +54,7 @@
               />
 
               <input
-                      class="button interior-block"
+                      class="lex_card_button"
                       type="submit"
                       th:value="${message.getDescription}"
               />

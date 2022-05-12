@@ -7,21 +7,21 @@
 </head>
     <body>
         <div th:fragment="userForm">
-            <form method="POST" th:action="@{/admin/newUser}"  action="#" class="col-md-4">
+            <form method="POST" th:action="@{/admin/newUser}"  action="#" >
                 <th:p>Имя</th:p>
-                <input type="text" class="form-control" name="first_name" required>
+                <input type="text" class="form-control quickInput" name="first_name" required>
                 <br>
                 <th:p>Фамилия</th:p>
-                <input type="text" class="form-control" name="last_name" required>
+                <input type="text" class="form-control quickInput" name="last_name" required>
                 <br>
                 <th:p>Логин</th:p>
-                <input type="text" class="form-control" name="username" required>
+                <input type="text" class="form-control quickInput" name="username" required>
                 <br>
                 <th:p>Пароль</th:p>
-                <input type="text" class="form-control" name="password" required>
+                <input type="text" class="form-control quickInput" name="password" required>
                 <br>
                 <th:p>Роль</th:p>
-                <select class="form-select" name="role" required>
+                <select class="form-select quickInput" name="role" required>
                     <option selected value="3">Пользователь</option>
                     <option value="1">Администратор</option>
                     <option value="2">Специалист поддержки</option>
@@ -33,14 +33,14 @@
             </form>
         </div>
         <div th:fragment="typeForm">
-            <form method="POST" th:action="@{/admin/newType}"  action="#" class="col-md-4">
+            <form method="POST" th:action="@{/admin/newType}"  action="#">
                 <th:p>ID</th:p>
-                <input type="text" name="id" class="form-control" required>
+                <input type="text" name="id" class="form-control quickInput" required>
                 <br>
                 <th:p>description</th:p>
-                <input type="text" name="description" class="form-control" required ><br>
+                <input type="text" name="description" class="form-control quickInput" required ><br>
 
-                <select class="form-select" name="alert" required>
+                <select class="form-select quickInput" name="alert" required>
                     <option selected value="1">Обычная</option>
                     <option value="0">Срочная</option>
                 </select>
@@ -50,12 +50,12 @@
             </form>
         </div>
         <div th:fragment="priorityForm">
-            <form method="POST" th:action="@{/admin/newPriority}"  action="#" class="col-md-4">
+            <form method="POST" th:action="@{/admin/newPriority}"  action="#">
                 <th:p>ID</th:p>
-                <input type="text" name="id" class="form-control" required>
+                <input type="text" name="id" class="form-control quickInput" required>
                 <br>
                 <th:p>description</th:p>
-                <input type="text" name="description" class="form-control" required>
+                <input type="text" name="description" class="form-control quickInput" required>
 
                 <br>
                 <input type="submit" class="lex_card_button" value="Отправить" />
@@ -63,10 +63,10 @@
         </div>
 
         <div th:fragment="quickForm">
-            <form method="POST" th:action="@{/admin/newQuick}"  action="#" class="col-md-4">
+            <form method="POST" th:action="@{/admin/newQuick}"  action="#">
 
                 <th:p>description</th:p>
-                <input type="text" name="description" class="form-control" required>
+                <input type="text" name="description" class="form-control quickInput" required>
 
                 <br>
                 <input type="submit" class="lex_card_button" value="Отправить" />

@@ -16,22 +16,22 @@
 
         <ul class="left-navbar-lex">
             <li class="navbar-lex-item">
-                <a class="lex_card_button" href="/">Обновить</a>
+                <a class="nav_lex_card_button" href="/">Обновить</a>
             </li>
             <li class="navbar-lex-item" sec:authorize="hasRole('ADMIN')">
-                <a class="lex_card_button" href="/admin/panel">Панель Администратора</a>
+                <a class="nav_lex_card_button" href="/admin/panel">Панель Администратора</a>
             </li>
             <li class="navbar-lex-item" sec:authorize="hasRole('SUPPORT')">
-                <a class="lex_card_button" href="/support/panel">Панель Поддержки</a>
+                <a class="nav_lex_card_button" href="/support/panel">Панель Поддержки</a>
             </li>
             <li class="nav-lex-item" sec:authorize="hasRole('SUPPORT')">
-                <a class="lex_card_button" href="/support/report">Отчет</a>
+                <a class="nav_lex_card_button" href="/support/report">Отчет</a>
             </li>
             <li class="nav-lex-item" sec:authorize="hasRole('ADMIN')">
-                <a class="lex_card_button" href="/admin/report">Отчет</a>
+                <a class="nav_lex_card_button" href="/admin/report">Отчет</a>
             </li>
             <li class="nav-lex-item" sec:authorize="hasRole('USER')">
-                <a class="lex_card_button" href="/user/report">Отчет</a>
+                <a class="nav_lex_card_button" href="/user/report">Отчет</a>
             </li>
         </ul>
         <div class="center-navbar-lex">
@@ -41,10 +41,10 @@
         </div>
         <ul class="right-navbar-lex">
             <li class="navbar-lex-item">
-                <a class="lex_card_button" th:text="${user.getFirst_name + ' ' + user.getLast_name}" href="/">Имя Пользователя</a>
+                <a class="nav_lex_card_button" th:text="${user.getFirst_name + ' ' + user.getLast_name}" href="/">Имя Пользователя</a>
             </li>
             <li class="navbar-lex-item">
-                <a class="lex_card_button" href="/logout">Выйти</a>
+                <a class="nav_lex_card_button" href="/logout">Выйти</a>
             </li>
         </ul>
 

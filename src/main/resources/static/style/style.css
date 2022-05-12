@@ -50,6 +50,7 @@ body {
 
 	background-position: center center;
 	background-repeat: no-repeat;
+	overflow: hidden;
 }
 
 .header {
@@ -88,6 +89,25 @@ body {
 	color: #313131;
 	border-color: black;
 }
+
+.nav_lex_card_button {
+	/* width: 90px; */
+	border: 1px solid black; /* Рамка */
+	border-radius: 10px;
+	display: block;
+	/* float:right; */
+	margin: 5px;
+	margin-left: auto;
+	padding: 5px 10px; /* Поля */
+	text-decoration: none; /* Убираем подчёркивание */
+	color: #000; /* Цвет текста */
+}
+
+.nav_lex_card_button:hover {
+	box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Тень */
+	background: linear-gradient(to bottom, #fcfff4, #e9e9ce); /* Градиент */
+
+ }
 
 li a{
 		text-decoration: none;
@@ -182,13 +202,13 @@ button:active {
 }
 
 .button_mail {
-	margin-top: 30px;
+	margin-top: 10px;
 	position: relative;
-	left: 30px;
+
   display: block;
   width: 10em;
   height: 2.5em;
-  line-height: 2.5em;
+
   vertical-align: middle;
   text-align: center;
   text-decoration: none;
@@ -196,7 +216,7 @@ button:active {
   color: #fff;
   outline: none;
   border: 2px solid #F64C2B;
-  border-radius: 5px;
+  border-radius: 10px;
   box-shadow: 0 0 0 60px rgba(0,0,0,0) inset, .1em .1em .2em #800;
   background: linear-gradient(#FB9575, #F45A38 48%, #EA1502 52%, #F02F17);
 }
@@ -213,7 +233,7 @@ button:active {
 	grid-template-columns: 3fr 1fr;
 	/* grid-template-rows: 1fr 1fr; */
 	grid-gap: 20px;
-	height: 80vh;
+	height: 85vh;
 
 	/* align-items: center; */
 }
@@ -254,7 +274,7 @@ button:active {
 
 .lex-card-header {
 	display: block;
-	background-color: #777674;
+	background-color: #EFEFEF;
 	margin: 5px 10px;
 	padding-left: 10px;
 	border-radius: 5px;
@@ -288,6 +308,8 @@ button:active {
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
+	height: 94%;
+	max-height: 100vh;
 }
 
 .right-block-up {
@@ -296,27 +318,59 @@ button:active {
 }
 
 .right-block-up-button {
-	margin-top: 30px;
+	margin-top: 15px;
+
+}
+
+.quickButton {
+    width: 95%;
+    max-width: 25vw;
+    border: 1px solid black; /* Рамка */
+    border-radius: 10px;
+    display: block;
+    /* float:right; */
+    margin: 5px;
+    margin-left: auto;
+    padding: 5px 10px; /* Поля */
+    text-decoration: none; /* Убираем подчёркивание */
+    color: #000; /* Цвет текста */
 }
 
 .right-block-down {
 	flex-grow: 1;
+	width: 95%;
+    height: 20%;
+    margin-top: 20px;
+    }
 }
 
 
 
 .section_forms_input {
+
 	border: 1px solid black;
-	border-radius: 20px;
-	width: 250px;
-	height: 100px;
+	border-radius: 10px;
+	width: 95%;
+	height: 30px;
+
+	padding: 5px;
+	resize: none;
+}
+
+.quickInput {
+
+	border: 1px solid black;
+	border-radius: 10px;
+	width: 95%;
+	height: 30px;
 
 	padding: 5px;
 	resize: none;
 }
 
 .scrollBlock{
-    height: 95%;
+    height: 85%;
+    max-height: 85vh;
     overflow-y: auto;
 
 }
@@ -338,9 +392,28 @@ button:active {
 }
 
 .rightScroll {
-    height: 75%;
+    height: 70%;
     width: 100%;
-    align-input: center;
-    width-input: 100%;
+    align-items: center;
     overflow-y: auto;
 }
+
+.panels {
+
+	border: 1px solid black; /* Рамка */
+	border-radius: 10px;
+	display: block;
+	/* float:right; */
+	margin: 5px;
+	margin-left: 9%;
+	padding: 5px 10px; /* Поля */
+	text-decoration: none; /* Убираем подчёркивание */
+	color: #000; /* Цвет текста */
+	width: 20%
+}
+
+.panels:hover {
+	box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Тень */
+	background: linear-gradient(to bottom, #fcfff4, #e9e9ce); /* Градиент */
+
+ }

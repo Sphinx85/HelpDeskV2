@@ -28,8 +28,8 @@ public class StatusForMessage implements StatusBuilder {
     public String construct(Message message) {
         StringBuilder status_complete = new StringBuilder();
         if (message.getSupport_id() == 0)
-            return (status_complete.append("Вашу заявку еще не приняли в работу").toString());
-        return (status_complete.append("Вашей заявкой занимается: ")
+            return (status_complete.append("Принята").toString());
+        return (status_complete.append("Обрабатывается ")
                 .append(userService.findById(message.getSupport_id()).get().getFirst_name())
                 .append(" ")
                 .append(userService.findById(message.getSupport_id()).get().getLast_name())

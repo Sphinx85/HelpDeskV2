@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Form</title>
-    <link rel="stylesheet" href="/style/style.css">
-</head>
+<head th:insert="styles :: css"></head>
     <body>
         <div th:fragment="userForm">
             <form method="POST" th:action="@{/admin/newUser}"  action="#" >

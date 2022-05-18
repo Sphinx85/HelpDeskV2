@@ -66,13 +66,13 @@
           <div class="section_forms_forms">
             <h3 class="header-text">Своя заявка</h3>
             <form method="POST" th:action="@{/workplace/message/save}">
-              <input
-                class="quickInput"
+              <textarea
+                class="quickInputMain"
                 type="text"
                 name="description"
                 placeholder=" Чем я могу вам помочь?"
                 required
-              />
+              ></textarea>
 
               <input class="button_mail" type="submit" value="Отправить" />
             </form>

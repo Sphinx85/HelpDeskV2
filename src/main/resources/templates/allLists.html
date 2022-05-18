@@ -2,11 +2,7 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html"
       xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Messages</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="/style/style.css">
-</head>
+<head th:insert="styles :: css"></head>
 <body>
 <header>
     <!--suppress CheckEmptyScriptTag -->
@@ -23,36 +19,95 @@
                         <div class="lex-card">
                             <div class="card-body m-2">
                                 <h4 class="lex-card-header" th:text="${message.getDescription}">a</h4>
-                                <a class="lex_card_button" data-bs-toggle="collapse" th:href="'#content' + ${message.getId}" role="button" aria-expanded="false" aria-controls="content">Детали</a>
+                                <a
+                                        class="lex_card_button"
+                                        data-bs-toggle="collapse"
+                                        th:href="'#content' + ${message.getId}"
+                                        role="button"
+                                        aria-expanded="false"
+                                        aria-controls="content"
+                                >Детали</a>
                                 <div class="lex_card_text collapse" th:id="'content' + ${message.getId}">
-                                    <label for="id">Номер заявки</label>
-                                    <p id="id" th:text="${message.getId}">a</p>
-                                    <label for="status">Статус заявки</label>
-                                    <p id="status" th:text="${message.getStatus}">a</p>
-                                    <label for="type">Тип неполадки</label>
-                                    <p id="type" th:text="${message.getType.getDescription}">a</p>
-                                    <label for="priority">Приоритет</label>
-                                    <p id="priority" th:text="${message.getPriority.getDescription}">a</p>
-                                    <label for="user">Автор</label>
-                                    <p id="user">
-                                        <span th:text="${message.getUser.getFirst_name}"></span>
-                                        <span th:text="${message.getUser.getLast_name}"></span>
+
+                                    <p>
+                                        <label class="label" for="id">Номер заявки: </label>
+                                        <span class="value" id="id" th:text="${message.getId}">a</span>
                                     </p>
-                                    <button th:if="${message.getActual}" sec:authorize="hasRole('ADMIN')" th:onclick="window.location.href = '/admin/delete/message/[[${message.getId}]]';" type="button">Удалить</button>
-                                    <button sec:authorize="hasRole('SUPPORT')" th:if="${message.getSupport_id} eq 0" th:onclick="window.location.href = '/support/apply/[[${message.getId}]]';" type="button">Взять в работу</button>
-                                    <div align="right" th:each="comment : ${message.getComments}">
-                                        <div th:text = "${comment.getDate} + ' ' + ${comment.getDescription}">a</div>
+
+                                    <p>
+                                        <label class="label" for="status">Статус заявки: </label>
+                                        <span class="value" id="status" th:text="${message.getStatus}">a</span>
+                                    </p>
+
+                                    <p>
+                                        <label class="label" for="type">Тип неполадки: </label>
+                                        <span class="value" id="type" th:text="${message.getType.getDescription}">a</span>
+                                    </p>
+
+                                    <p th:if="${message.getActual}">
+                                        <label class="label" for="actual">Актуальность заявки: </label>
+                                        <span class="value" id="actual" >В работе</span>
+                                    </p>
+
+                                    <p th:unless="${message.getActual}">
+                                        <label class="label" for="noActual">Актуальность заявки: </label>
+                                        <span class="value" id="noActual" >Завершена/Удалена</span>
+                                    </p>
+
+                                    <p>
+                                        <label class="label" for="date">Дата создания: </label>
+                                        <span class="value" id="date" th:text="${message.getDate}">а</span>
+                                    </p>
+
+                                    <p>
+                                        <label class="label" for="priority">Приоритет: </label>
+                                        <span class="value" id="priority" th:text="${message.getPriority.getDescription}">a</span>
+                                    </p>
+
+                                    <p>
+                                        <label class="label" for="user">Автор: </label>
+                                        <span class="value" id="user">
+                                            <span style="font-size: x-large" th:text="${message.getUser.getFirst_name}"></span>
+                                            <span style="font-size: x-large" th:text="${message.getUser.getLast_name}"></span>
+                                        </span>
+                                    </p>
+
+                                    <button
+                                            th:if="${message.getActual}"
+                                            sec:authorize="hasRole('ADMIN')"
+                                            th:onclick="window.location.href = '/admin/delete/message/[[${message.getId}]]';"
+                                            type="button"
+                                            class="serviceButton"
+                                    >Удалить</button>
+                                    <button
+                                            sec:authorize="hasRole('SUPPORT')"
+                                            th:if="${message.getSupport_id} eq 0"
+                                            th:onclick="window.location.href = '/support/apply/[[${message.getId}]]';"
+                                            type="button"
+                                            class="serviceButton"
+                                    >Взять в работу</button>
+                                    <div align="right" class="comment" th:each="comment : ${message.getComments}">
+                                        <div class="comment" th:text = "${comment.getDate} + ' ' + ${comment.getDescription}">a</div>
                                     </div>
                                     <div align="right">
                                         <form sec:authorize="hasRole('SUPPORT')" method="POST" th:action="@{/support/comment}" action="#">
-                                            <input type="text" name="description">
+                                            <input type="text" name="description" class="quickInput">
                                             <br>
                                             <br>
                                             <input type="hidden" name="messageId" th:value="${message.getId}">
-                                            <input type="submit" class="button" value="Отправить" />
+                                            <input
+                                                    type="submit"
+                                                    class="serviceButton"
+                                                    value="Отправить" />
                                         </form>
                                     </div>
-                                    <button sec:authorize="hasRole('SUPPORT')" th:unless="${message.getSupport_id} eq 0" th:onclick="window.location.href = '/support/complete/[[${message.getId}]]';" type="button">Завершить</button>
+                                    <button
+                                            sec:authorize="hasRole('SUPPORT')"
+                                            th:unless="${message.getSupport_id} eq 0"
+                                            th:onclick="window.location.href = '/support/complete/[[${message.getId}]]';"
+                                            type="button"
+                                            class="serviceButton"
+                                    >Завершить</button>
                                 </div>
                             </div>
                         </div>
@@ -61,20 +116,52 @@
 
             <p th:case="users">
                 <p th:if="${users}">
-                    <button  type="button" data-bs-toggle="modal" data-bs-target="#formNew" class="lex_card_button">New User</button>
+                    <button
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#formNew"
+                            class="serviceButton"
+                    >New User</button>
 
                     <div th:if="${users}" >
                         <div th:each="message : ${users}">
                             <div class="lex-card">
                                 <div class="card-body m-2">
                                     <h4 class="lex-card-header" th:text="${message.getFirst_name + ' ' + message.getLast_name}">a</h4>
-                                    <a class="lex_card_button" data-bs-toggle="collapse" th:href="'#content' + ${message.getId}" role="button" aria-expanded="false" aria-controls="content">Детали</a>
+                                    <a
+                                            class="lex_card_button"
+                                            data-bs-toggle="collapse"
+                                            th:href="'#content' + ${message.getId}"
+                                            role="button"
+                                            aria-expanded="false"
+                                            aria-controls="content"
+                                    >Детали</a>
                                     <div class="lex_card_text collapse" th:id="'content' + ${message.getId}">
-                                        <label for="idUser">Номер</label>
-                                        <p id="idUser" th:text="${message.getId}">a</p>
-                                        <label for="username">Логин</label>
-                                        <p id="username" th:text="${message.getUsername}">a</p>
-                                        <button th:method="delete" sec:authorize="hasRole('ADMIN')" th:onclick="window.location.href = '/admin/delete/user/[[${message.getId}]]';" type="button">Удалить</button>
+
+                                        <p>
+                                            <label class="label" for="idUser">Номер: </label>
+                                            <span class="value" id="idUser" th:text="${message.getId}"><b>a</b></span>
+                                        </p>
+
+                                        <p>
+                                            <label class="label" for="username">Логин: </label>
+                                            <span class="value" id="username" th:text="${message.getUsername}">a</span>
+                                        </p>
+
+                                        <div th:each="role : ${message.getRoles}">
+                                            <p>
+                                                <label class="label" for="role">Роли: </label>
+                                                <span class="value" id="role" th:text="${role.getRole}">a</span>
+                                            </p>
+                                        </div>
+
+                                        <button
+                                                th:method="delete"
+                                                sec:authorize="hasRole('ADMIN')"
+                                                th:onclick="window.location.href = '/admin/delete/user/[[${message.getId}]]';"
+                                                type="button"
+                                                class="serviceButton"
+                                        >Удалить</button>
                                     </div>
                                 </div>
                             </div>
@@ -84,17 +171,34 @@
             <p th:case="types">
 
                 <p th:if="${types}">
-                    <button data-bs-toggle="modal" data-bs-target="#formNew" type="button" class="lex_card_button">New Type</button>
+                    <button
+                            data-bs-toggle="modal"
+                            data-bs-target="#formNew"
+                            type="button"
+                            class="serviceButton"
+                    >New Type</button>
 
                     <div th:if="${types}" >
                         <div th:each="message : ${types}">
                             <div class="lex-card">
                                 <div class="card-body m-2">
-                                    <label for="idType">ID</label>
-                                    <span id="idType" th:text="${message.getId}"></span>
-                                    <label for="descriptionType">Описание</label>
-                                    <span id="descriptionType" th:text="${message.getDescription}"></span>
-                                    <button th:onclick="window.location.href = '/admin/delete/type/[[${message.getId}]]';" type="button">Удалить</button>
+
+                                    <p>
+                                        <label class="label" for="idType">ID: </label>
+                                        <span class="value" id="idType" th:text="${message.getId}"></span>
+                                    </p>
+
+                                    <p>
+                                        <label class="label" for="descriptionType">Описание: </label>
+                                        <span class="value" id="descriptionType" th:text="${message.getDescription}"></span>
+                                    </p>
+
+                                    <button
+                                            th:unless="${message.getId == 0}"
+                                            th:onclick="window.location.href = '/admin/delete/type/[[${message.getId}]]';"
+                                            type="button"
+                                            class="serviceButton"
+                                    >Удалить</button>
                                 </div>
                             </div>
                         </div>
@@ -109,10 +213,16 @@
                         <div th:each="message : ${priorities}">
                             <div class="lex-card">
                                 <div class="card-body m-2">
-                                    <label for="idPriority">ID</label>
-                                    <span id="idPriority" th:text="${message.getId}"></span>
-                                    <label for="descriptionPriority">Описание</label>
-                                    <span id="descriptionPriority" th:text="${message.getDescription}"></span>
+
+                                    <p>
+                                        <label class="label" for="idPriority">ID: </label>
+                                        <span class="value" id="idPriority" th:text="${message.getId}"></span>
+                                    </p>
+
+                                    <p>
+                                        <label class="label" for="descriptionPriority">Описание: </label>
+                                        <span class="value" id="descriptionPriority" th:text="${message.getDescription}"></span>
+                                    </p>
 <!--                                    <button th:method="delete" th:onclick="window.location.href = '/admin/delete/priority/[[${message.getId}]]';" type="button">Удалить</button>-->
                                 </div>
                             </div>
@@ -122,17 +232,34 @@
             <p th:case="quickMessages">
 
                 <p th:if="${quickMessages}">
-                    <button data-bs-toggle="modal" data-bs-target="#formNew" type="button" class="lex_card_button">New Quick</button>
+                    <button
+                            data-bs-toggle="modal"
+                            data-bs-target="#formNew"
+                            type="button"
+                            class="serviceButton"
+                    >New Quick</button>
 
                     <div th:if="${quickMessages}" >
                         <div th:each="message : ${quickMessages}">
                             <div class="lex-card">
                                 <div class="card-body m-2">
-                                    <label for="idQuick">ID</label>
-                                    <span id="idQuick" th:text="${message.getId}"></span>
-                                    <label for="descriptionPriority">Описание</label>
-                                    <span id="descriptionQuick" th:text="${message.getDescription}"></span>
-                                    <button th:method="delete" th:onclick="window.location.href = '/admin/delete/quick/[[${message.getId}]]';" type="button">Удалить</button>
+
+                                    <p>
+                                        <label class="label" for="idQuick">ID: </label>
+                                        <span class="value" id="idQuick" th:text="${message.getId}"></span>
+                                    </p>
+
+                                    <p>
+                                        <label class="label" for="descriptionPriority">Описание: </label>
+                                        <span class="value" id="descriptionQuick" th:text="${message.getDescription}"></span>
+                                    </p>
+
+                                    <button
+                                            th:method="delete"
+                                            th:onclick="window.location.href = '/admin/delete/quick/[[${message.getId}]]';"
+                                            type="button"
+                                            class="serviceButton"
+                                    >Удалить</button>
                                 </div>
                             </div>
                         </div>
@@ -187,6 +314,13 @@
                     Описания должны быть максимально отличны друг от друга в текущей версии приложения.
                 </p>
                 <p>
+                    <b>
+                        Важно заполнить классификатор до начала использования программы.<br>
+                        Если попытаться удалить классификацию, которая присвоена заявке, то программа<br>
+                        покажет страницу 404 и произойдет ошибка SQL. Классификация удалена не будет.
+                    </b>
+                </p>
+                <p>
                     Обязательно необходим элемент Прочее с ID = 0. Его отсутствие может привести к ошибкам.
                 </p>
             </div>
@@ -214,7 +348,13 @@
                 <h5 th:if="${types}" class="modal-title" th:id="label" th:text="'Новый тип заявки'">New User</h5>
                 <h5 th:if="${priorities}" class="modal-title" th:id="label" th:text="'Новый приоритет заявки'">New User</h5>
                 <h5 th:if="${quickMessages}" class="modal-title" th:id="label" th:text="'Новая быстрая заявка'">New User</h5>
-                <button type="button" class="lex_card_button" data-bs-dismiss="modal" aria-bs-label="Close"></button>
+                <button
+                        type="button"
+                        class="serviceButton"
+                        data-bs-dismiss="modal"
+                        aria-bs-label="Close"
+                        value="X"
+                ></button>
             </div>
             <div class="modal-body">
                 <ul th:if="${users}" th:insert="forms::userForm"></ul>

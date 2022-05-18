@@ -334,6 +334,7 @@ button:active {
     padding: 5px 10px; /* Поля */
     text-decoration: none; /* Убираем подчёркивание */
     color: #000; /* Цвет текста */
+    white-space: normal;
 }
 
 .right-block-down {
@@ -362,7 +363,6 @@ button:active {
 	border: 1px solid black;
 	border-radius: 10px;
 	width: 95%;
-	height: 30px;
 
 	padding: 5px;
 	resize: none;
@@ -416,4 +416,61 @@ button:active {
 	box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Тень */
 	background: linear-gradient(to bottom, #fcfff4, #e9e9ce); /* Градиент */
 
+ }
+
+ .comment{
+    margin-top: 20px;
+    margin-bottom: 5px
+ }
+
+ .serviceButton {
+
+ 	border: 1px solid black; /* Рамка */
+ 	border-radius: 10px;
+ 	display: block;
+ 	/* float:right; */
+ 	margin: 5px;
+ 	margin-left: auto;
+ 	padding: 5px 10px; /* Поля */
+ 	text-decoration: none; /* Убираем подчёркивание */
+ 	color: #000; /* Цвет текста */
+ }
+
+ .serviceButton:hover {
+ 	box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Тень */
+ 	background: linear-gradient(to bottom, #fcfff4, #e9e9ce); /* Градиент */
+
+ }
+
+ .label {
+    margin-left: 2%;
+    font-size: large;
+ }
+
+ .value {
+    margin-left: 1%;
+    font-size: x-large;
+ }
+
+ .infoCard {
+       grid-template-columns: 1fr 1fr;
+ }
+
+ .leftInfo {
+    margin-right: 10%;
+ }
+
+ .rightInfo {
+    margin-left: 10%;
+ }
+
+ .quickInputMain {
+
+ 	border: 1px solid black;
+ 	border-radius: 10px;
+ 	width: 95%;
+ 	height: 82px;
+
+ 	padding: 5px;
+ 	resize: none;
  }
